@@ -224,17 +224,31 @@
             box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08);
         }
 
+        /* === Featured image: hero-like responsive zoom (BO) === */
+        .featured-media {
+            position: relative;
+            width: 100%;
+            height: clamp(260px, 55vw, 420px); /* 画面幅に応じて高さ可変 */
+            overflow: hidden;                  /* はみ出しを切ってズームに見せる */
+            background: linear-gradient(180deg, #f5f5f5, #f5f5f5);
+            cursor: pointer;
+
+            /* 画面が狭いほどズーム（scale）を強める */
+            --zoom: clamp(1, calc(1.6 - (100vw / 1200)), 1.35);
+        }
+
         .featured-image {
             width: 100%;
-            height: 420px;
-            object-fit: contain;
-            background: linear-gradient(180deg, #f5f5f5, #f5f5f5);
-            padding: 24px;
-            box-sizing: border-box;
+            height: 100%;
             display: block;
-            cursor: pointer;
+
+            object-fit: cover;       /* ヒーロー同様に cover */
+            object-position: center; /* 必要なら center top などに調整 */
+
+            transform: scale(var(--zoom));
+            transform-origin: center;
         }
-        
+
         /* Image zoom modal for mobile */
         .image-modal {
             display: none;
@@ -247,20 +261,20 @@
             background-color: rgba(0, 0, 0, 0.9);
             overflow: auto;
         }
-        
+
         .image-modal.active {
             display: flex;
             align-items: center;
             justify-content: center;
         }
-        
+
         .image-modal-content {
             max-width: 95%;
             max-height: 95%;
             object-fit: contain;
             margin: auto;
         }
-        
+
         .image-modal-close {
             position: absolute;
             top: 20px;
@@ -271,11 +285,26 @@
             cursor: pointer;
             z-index: 2001;
         }
-        
+
         .image-modal-close:hover {
             color: #ccc;
         }
-        
+
+        /* スマホで「タップして拡大」バッジ（imgには ::after が効かないので wrapper に付与） */
+        @media (hover: none) and (pointer: coarse) {
+            .featured-media::after {
+                content: '🔍 タップして拡大';
+                position: absolute;
+                bottom: 16px;
+                right: 16px;
+                background: rgba(0, 0, 0, 0.6);
+                color: white;
+                padding: 8px 12px;
+                border-radius: 6px;
+                font-size: 12px;
+                pointer-events: none;
+            }
+        }
 
         .featured-content {
             padding: 40px;
@@ -444,6 +473,20 @@
             .news-grid {
                 grid-template-columns: 1fr;
             }
+
+            /* Featured text sizing for mobile */
+            .featured-content h2 {
+                font-size: 22px;
+            }
+
+            .featured-content p {
+                font-size: 16px;
+            }
+
+            /* スマホ時は少し高さを確保（任意） */
+            .featured-media {
+                height: clamp(280px, 70vw, 420px);
+            }
         }
 
         /* Scroll animations */
@@ -466,165 +509,132 @@
         .stagger-4 { animation-delay: 0.4s; }
         .stagger-5 { animation-delay: 0.5s; }
         .stagger-6 { animation-delay: 0.6s; }
-    
-    /* === MOBILE NAVIGATION === */
-    .logo-text-mobile {
-        display: none;
-    }
-    
-    .logo-text-desktop {
-        display: inline;
-    }
 
-    .menu-toggle {
-        display: none;
-        flex-direction: column;
-        gap: 5px;
-        background: none;
-        border: none;
-        cursor: pointer;
-        padding: 8px;
-        z-index: 1001;
-    }
-
-    .menu-toggle span {
-        width: 25px;
-        height: 2px;
-        background-color: var(--color-text);
-        transition: all 0.3s ease;
-    }
-
-    .menu-toggle.active span:nth-child(1) {
-        transform: rotate(45deg) translate(7px, 7px);
-    }
-
-    .menu-toggle.active span:nth-child(2) {
-        opacity: 0;
-    }
-
-    .menu-toggle.active span:nth-child(3) {
-        transform: rotate(-45deg) translate(6px, -6px);
-    }
-
-    /* Mobile Responsive Styles */
-    @media (max-width: 768px) {
-        body {
-            overflow-x: hidden;
-        }
-
-        .logo {
-            font-size: 14px !important;
-            gap: 8px !important;
-        }
-
-        .logo-img {
-            height: 24px !important;
-        }
-
+        /* === MOBILE NAVIGATION === */
         .logo-text-mobile {
-            display: inline;
-        }
-        
-        .logo-text-desktop {
             display: none;
         }
-        
+
+        .logo-text-desktop {
+            display: inline;
+        }
+
         .menu-toggle {
-            display: flex;
-        }
-
-        .nav-container {
-            padding: 12px 15px !important;
-        }
-
-        .nav-links {
-            position: fixed;
-            top: 0;
-            right: -100%;
-            height: 100vh;
-            width: 70%;
-            max-width: 300px;
-            background: rgba(247, 246, 243, 0.98);
-            backdrop-filter: blur(10px);
+            display: none;
             flex-direction: column;
-            padding: 80px 30px 30px;
-            gap: 0 !important;
-            transition: right 0.3s ease;
-            box-shadow: -2px 0 10px rgba(0, 0, 0, 0.1);
-            z-index: 999;
-        }
-
-        .nav-links.active {
-            right: 0;
-        }
-
-        .nav-links li {
-            border-bottom: 1px solid var(--color-border);
-        }
-
-        .nav-links a {
-            display: block;
-            padding: 18px 0;
-            font-size: 16px !important;
-        }
-
-        .featured-image {
-            min-height: 250px;
-            max-height: 400px;
-            height: auto;
-            padding: 20px;
-            object-fit: contain;
+            gap: 5px;
+            background: none;
+            border: none;
             cursor: pointer;
+            padding: 8px;
+            z-index: 1001;
         }
-        
-        .featured-content h2 {
-            font-size: 22px;
+
+        .menu-toggle span {
+            width: 25px;
+            height: 2px;
+            background-color: var(--color-text);
+            transition: all 0.3s ease;
         }
-        
-        .featured-content p {
-            font-size: 16px;
+
+        .menu-toggle.active span:nth-child(1) {
+            transform: rotate(45deg) translate(7px, 7px);
         }
-        
-        @media (hover: none) and (pointer: coarse) {
-            .featured-image::after {
-                content: '🔍 タップして拡大';
-                position: absolute;
-                bottom: 30px;
-                right: 30px;
-                background: rgba(0, 0, 0, 0.6);
-                color: white;
-                padding: 8px 12px;
-                border-radius: 4px;
-                font-size: 12px;
-                pointer-events: none;
+
+        .menu-toggle.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .menu-toggle.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(6px, -6px);
+        }
+
+        /* Mobile Responsive Styles */
+        @media (max-width: 768px) {
+            body {
+                overflow-x: hidden;
+            }
+
+            .logo {
+                font-size: 14px !important;
+                gap: 8px !important;
+            }
+
+            .logo-img {
+                height: 24px !important;
+            }
+
+            .logo-text-mobile {
+                display: inline;
+            }
+
+            .logo-text-desktop {
+                display: none;
+            }
+
+            .menu-toggle {
+                display: flex;
+            }
+
+            .nav-container {
+                padding: 12px 15px !important;
+            }
+
+            .nav-links {
+                position: fixed;
+                top: 0;
+                right: -100%;
+                height: 100vh;
+                width: 70%;
+                max-width: 300px;
+                background: rgba(247, 246, 243, 0.98);
+                backdrop-filter: blur(10px);
+                flex-direction: column;
+                padding: 80px 30px 30px;
+                gap: 0 !important;
+                transition: right 0.3s ease;
+                box-shadow: -2px 0 10px rgba(0, 0, 0, 0.1);
+                z-index: 999;
+            }
+
+            .nav-links.active {
+                right: 0;
+            }
+
+            .nav-links li {
+                border-bottom: 1px solid var(--color-border);
+            }
+
+            .nav-links a {
+                display: block;
+                padding: 18px 0;
+                font-size: 16px !important;
+            }
+
+            .footer-container {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+
+            footer {
+                padding: 40px 15px 20px;
             }
         }
 
-        .footer-container {
-            grid-template-columns: 1fr;
-            gap: 30px;
-        }
+        @media (min-width: 769px) {
+            .logo {
+                font-size: 20px;
+                gap: 12px;
+            }
 
-        footer {
-            padding: 40px 15px 20px;
-        }
-    }
+            .logo-img {
+                height: 32px;
+            }
 
-    @media (min-width: 769px) {
-        .logo {
-            font-size: 20px;
-            gap: 12px;
+            .nav-container {
+                padding: 20px 40px;
+            }
         }
-
-        .logo-img {
-            height: 32px;
-        }
-
-        .nav-container {
-            padding: 20px 40px;
-        }
-    }
-    
     </style>
 </head>
 <body>
@@ -659,10 +669,9 @@
                 <img src="images/hero-main.png" alt="Research visualization" class="mars-image">
                 <div class="mars-overlay"></div>
             </div>
-            
-            <!-- Hero content now overlays the image -->
 
-           <div class="hero-content">
+            <!-- Hero content now overlays the image -->
+            <div class="hero-content">
                 <h1>Getting to Grips with Exciton Spin Flips</h1>
                 <p class="hero-subtitle"> We explore new excitonic properties of organic semiconductors and tap them to form optoelectronic devices</p>
                 <a href="join.html" class="cta-button">Join Our Lab →</a>
@@ -673,7 +682,11 @@
     <!-- Featured Research -->
     <section class="featured-section">
         <div class="featured-card fade-in stagger-3">
-            <img src="images/news-research-BO.jpg" alt="BO" class="featured-image" id="featuredImage" onclick="openImageModal(event)">
+            <!-- ここを「ヒーロー方式（cover＋ズーム）」に変更 -->
+            <div class="featured-media" onclick="openImageModal(event)">
+                <img src="images/news-research-BO.jpg" alt="BO" class="featured-image" id="featuredImage">
+            </div>
+
             <div class="featured-content">
                 <div class="featured-label">Featured Research</div>
                 <h2><a href="https://doi.org/10.1039/D5SC01903F" target="_blank" style="text-decoration:none; color:inherit;">Bayesian Molecular Optimization for Rapid RISC</a></h2>
@@ -685,14 +698,14 @@
     <!-- Image Modal -->
     <div id="imageModal" class="image-modal" onclick="closeImageModal()">
         <span class="image-modal-close" onclick="closeImageModal()">&times;</span>
-        <img src="" alt="Enlarged view" class="image-modal-content" id="modalImage">
+        <img src="" alt="Enlarged view" class="image-modal-content" id="modalImage" onclick="event.stopPropagation()">
     </div>
 
     <!-- News Section -->
     <section class="news-section">
         <h2 class="section-title fade-in">Recent News</h2>
         <div class="news-grid">
-            
+
             <a href="https://www.mrs.org/meetings-events/annual-meetings/archive/meeting/symposium-sessions/call-for-papers/2026-mrs-spring-meeting/Symposium-EL04-Recent-Advances-in---Conjugated-Materials-From-Fundamentals-to-Device-Applications" target="_blank" style="text-decoration:none; color:inherit;">
             <div class="news-card fade-in stagger-1">
                 <img src="images/news-mrs-2026.png" alt="MRS 2026" class="news-image">
@@ -703,7 +716,7 @@
                 </div>
             </div>
             </a>
-            
+
             <a href="https://www.icredd.hokudai.ac.jp/opportunity/14659/" target="_blank" style="text-decoration:none; color:inherit;">
             <div class="news-card fade-in stagger-4">
                 <img src="images/news-wpi-position.png" alt="WPI Position" class="news-image">
@@ -725,7 +738,7 @@
                 </div>
             </div>
             </a>
-            
+
             <div class="news-card fade-in stagger-3">
                 <img src="images/news-pacifichem.png" alt="Pacifichem" class="news-image">
                 <div class="news-content">
@@ -746,7 +759,7 @@
                 </div>
             </div>
             </a>
-            
+
             <a href="https://www.n-aizawa.com/" target="_blank" style="text-decoration:none; color:inherit;">
             <div class="news-card fade-in stagger-6">
                 <img src="images/news-website-launch.jpg" alt="Website Launch" class="news-image">
@@ -872,9 +885,9 @@
             const modal = document.getElementById('imageModal');
             const modalImg = document.getElementById('modalImage');
             const img = document.getElementById('featuredImage');
-            
+
             modal.classList.add('active');
-            modalImg.src = img.src;
+            modalImg.src = img.currentSrc || img.src; // srcset対策
             document.body.style.overflow = 'hidden';
         }
 
