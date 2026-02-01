@@ -29,8 +29,10 @@
             background-color: var(--color-bg);
             color: var(--color-text);
             line-height: 1.6;
+            overflow-x: hidden;
         }
 
+        /* Navigation */
         nav {
             position: fixed;
             top: 0;
@@ -44,7 +46,7 @@
         .nav-container {
             max-width: 1400px;
             margin: 0 auto;
-            padding: 20px 40px;
+            padding: 15px 20px;
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -52,18 +54,57 @@
 
         .logo {
             font-family: var(--font-serif);
-            font-size: 20px;
+            font-size: 16px;
             font-weight: 600;
             color: var(--color-text);
             text-decoration: none;
             display: flex;
             align-items: center;
-            gap: 12px;
+            gap: 10px;
+            z-index: 1001;
         }
 
         .logo-img {
-            height: 32px;
+            height: 28px;
             width: auto;
+        }
+
+        .logo-text-mobile {
+            display: none;
+        }
+        
+        .logo-text-desktop {
+            display: inline;
+        }
+
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 8px;
+            z-index: 1001;
+        }
+
+        .menu-toggle span {
+            width: 25px;
+            height: 2px;
+            background-color: var(--color-text);
+            transition: all 0.3s ease;
+        }
+
+        .menu-toggle.active span:nth-child(1) {
+            transform: rotate(45deg) translate(7px, 7px);
+        }
+
+        .menu-toggle.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .menu-toggle.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(6px, -6px);
         }
 
         .nav-links {
@@ -83,9 +124,10 @@
             color: var(--color-accent);
         }
 
+        /* Hero Banner */
         .hero-banner {
-            margin-top: 72px;
-            height: 400px;
+            margin-top: 60px;
+            height: 300px;
             background: linear-gradient(135deg, #191918 0%, #2D2D2C 100%);
             display: flex;
             align-items: center;
@@ -100,7 +142,6 @@
             object-fit: cover;
             opacity: 1;
         }
-        
 
         .hero-overlay {
             position: absolute;
@@ -118,128 +159,112 @@
             color: white;
             text-align: center;
             z-index: 10;
-        }
-        
-        @keyframes heroFadeIn {
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+            padding: 0 20px;
         }
 
         .hero-text h1 {
             font-family: var(--font-serif);
-            font-size: clamp(42px, 6vw, 64px);
+            font-size: clamp(28px, 7vw, 64px);
             margin-bottom: 16px;
             font-weight: 400;
         }
 
         .hero-text p {
-            font-size: 20px;
+            font-size: clamp(16px, 4vw, 20px);
             opacity: 0.9;
         }
 
+        /* Content Section */
         .content-section {
-            padding: 80px 40px;
+            padding: 40px 20px 60px;
             max-width: 1400px;
             margin: 0 auto;
         }
 
         .intro-text {
             max-width: 800px;
-            margin-bottom: 80px;
+            margin-bottom: 40px;
         }
 
         .intro-text p {
-            font-size: 18px;
+            font-size: 16px;
             line-height: 1.8;
             color: rgba(25, 25, 24, 0.8);
-            margin-bottom: 20px;
+            margin-bottom: 16px;
         }
 
         .research-areas {
             display: grid;
-            gap: 60px;
+            gap: 40px;
         }
 
         .research-card {
             display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 40px;
+            grid-template-columns: 1fr;
+            gap: 0;
             background: var(--color-card-bg);
-            border-radius: 16px;
+            border-radius: 12px;
             overflow: hidden;
             border: 1px solid var(--color-border);
             transition: transform 0.4s ease, box-shadow 0.4s ease;
         }
 
         .research-card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.12);
+            transform: translateY(-4px);
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.08);
         }
-        
+
         .research-card img {
             transition: transform 0.6s ease;
         }
-        
+
         .research-card:hover img {
             transform: scale(1.05);
         }
 
-        .research-card:nth-child(even) {
-            direction: rtl;
-        }
-
-        .research-card:nth-child(even) > * {
-            direction: ltr;
-        }
-
         .research-image {
             width: 100%;
-            height: 100%;
+            height: 250px;
             object-fit: cover;
-            min-height: 400px;
         }
 
         .research-content {
-            padding: 40px;
+            padding: 24px 20px;
             display: flex;
             flex-direction: column;
             justify-content: center;
         }
 
         .research-label {
-            font-size: 13px;
+            font-size: 12px;
             text-transform: uppercase;
             letter-spacing: 0.5px;
             color: var(--color-accent);
-            margin-bottom: 16px;
+            margin-bottom: 12px;
         }
 
         .research-content h2 {
             font-family: var(--font-serif);
-            font-size: 32px;
-            margin-bottom: 20px;
+            font-size: clamp(22px, 5vw, 32px);
+            margin-bottom: 16px;
             font-weight: 400;
         }
 
         .research-content p {
-            font-size: 16px;
+            font-size: 15px;
             color: rgba(25, 25, 24, 0.7);
             line-height: 1.8;
-            margin-bottom: 16px;
+            margin-bottom: 14px;
         }
 
         .research-highlights {
-            margin-top: 24px;
+            margin-top: 20px;
         }
 
         .research-highlights h4 {
-            font-size: 14px;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
+            font-size: 15px;
             margin-bottom: 12px;
-            color: rgba(25, 25, 24, 0.6);
+            font-weight: 600;
         }
 
         .research-highlights ul {
@@ -248,40 +273,46 @@
         }
 
         .research-highlights li {
-            padding-left: 20px;
-            position: relative;
-            margin-bottom: 8px;
-            font-size: 15px;
-            color: rgba(25, 25, 24, 0.7);
+            padding: 8px 0;
+            border-bottom: 1px solid var(--color-border);
+            font-size: 14px;
+            line-height: 1.6;
         }
 
-        .research-highlights li:before {
-            content: "→";
-            position: absolute;
-            left: 0;
+        .research-highlights li:last-child {
+            border-bottom: none;
+        }
+
+        .research-highlights a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        .research-highlights a:hover {
             color: var(--color-accent);
         }
 
+        /* Footer */
         footer {
             background: var(--color-text);
             color: rgba(255, 255, 255, 0.8);
-            padding: 80px 40px 40px;
+            padding: 60px 20px 30px;
         }
 
         .footer-container {
             max-width: 1400px;
             margin: 0 auto;
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 48px;
-            margin-bottom: 48px;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
         }
 
         .footer-section h4 {
             font-family: var(--font-serif);
             color: white;
-            margin-bottom: 16px;
-            font-size: 18px;
+            margin-bottom: 14px;
+            font-size: 17px;
         }
 
         .footer-links {
@@ -289,14 +320,16 @@
         }
 
         .footer-links li {
-            margin-bottom: 12px;
+            margin-bottom: 10px;
         }
 
         .footer-links a {
             color: rgba(255, 255, 255, 0.7);
             text-decoration: none;
-            font-size: 15px;
+            font-size: 14px;
             transition: color 0.2s;
+            display: inline-block;
+            line-height: 1.5;
         }
 
         .footer-links a:hover {
@@ -306,13 +339,14 @@
         .footer-bottom {
             max-width: 1400px;
             margin: 0 auto;
-            padding-top: 32px;
+            padding-top: 30px;
             border-top: 1px solid rgba(255, 255, 255, 0.1);
             text-align: center;
-            font-size: 14px;
+            font-size: 13px;
             color: rgba(255, 255, 255, 0.5);
         }
 
+        /* Animations */
         .fade-in {
             opacity: 0;
             transform: translateY(30px);
@@ -330,16 +364,148 @@
         .stagger-2 { animation-delay: 0.2s; }
         .stagger-3 { animation-delay: 0.3s; }
 
-        @media (max-width: 968px) {
-            .research-card {
+        /* Mobile Styles */
+        @media (max-width: 768px) {
+            .logo-text-mobile {
+                display: inline;
+            }
+            
+            .logo-text-desktop {
+                display: none;
+            }
+            
+            .menu-toggle {
+                display: flex;
+            }
+
+            .nav-links {
+                position: fixed;
+                top: 0;
+                right: -100%;
+                height: 100vh;
+                width: 70%;
+                max-width: 300px;
+                background: rgba(247, 246, 243, 0.98);
+                backdrop-filter: blur(10px);
+                flex-direction: column;
+                padding: 80px 30px 30px;
+                gap: 0;
+                transition: right 0.3s ease;
+                box-shadow: -2px 0 10px rgba(0, 0, 0, 0.1);
+            }
+
+            .nav-links.active {
+                right: 0;
+            }
+
+            .nav-links li {
+                border-bottom: 1px solid var(--color-border);
+            }
+
+            .nav-links a {
+                display: block;
+                padding: 18px 0;
+                font-size: 16px;
+            }
+
+            .footer-container {
                 grid-template-columns: 1fr;
+                gap: 30px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .nav-container {
+                padding: 12px 15px;
+            }
+
+            .logo {
+                font-size: 14px;
+                gap: 8px;
+            }
+
+            .logo-img {
+                height: 24px;
+            }
+
+            .hero-banner {
+                height: 250px;
+            }
+
+            .content-section {
+                padding: 30px 15px 40px;
+            }
+
+            .research-image {
+                height: 200px;
+            }
+
+            .research-content {
+                padding: 20px 15px;
+            }
+
+            footer {
+                padding: 40px 15px 20px;
+            }
+        }
+
+        /* Desktop */
+        @media (min-width: 769px) {
+            .logo {
+                font-size: 20px;
+            }
+
+            .logo-img {
+                height: 32px;
+            }
+
+            .nav-container {
+                padding: 20px 40px;
+            }
+
+            .hero-banner {
+                height: 400px;
+            }
+
+            .content-section {
+                padding: 80px 40px;
+            }
+
+            .intro-text {
+                margin-bottom: 80px;
+            }
+
+            .research-areas {
+                gap: 60px;
+            }
+
+            .research-card {
+                grid-template-columns: 1fr 1fr;
+                gap: 40px;
             }
 
             .research-card:nth-child(even) {
+                direction: rtl;
+            }
+
+            .research-card:nth-child(even) > * {
                 direction: ltr;
             }
+
+            .research-image {
+                height: 100%;
+                min-height: 400px;
+            }
+
+            .research-content {
+                padding: 40px;
+            }
+
+            footer {
+                padding: 80px 40px 40px;
+            }
         }
-        /* Make links look like normal text by default */
+
         a {
             color: inherit;
             text-decoration: none;
@@ -347,7 +513,6 @@
         a:hover {
             color: inherit;
         }
-
     </style>
 </head>
 <body>
@@ -355,8 +520,13 @@
         <div class="nav-container">
             <a href="https://www.n-aizawa.com" class="logo">
                 <img src="images/logo.png" alt="Aizawa Research Group Logo" class="logo-img">
-                <span>Aizawa Research Group | 北海道大学 相澤研究室</span>
+                <span class="logo-text-mobile">Aizawa Research Group</span><span class="logo-text-desktop">Aizawa Research Group | 北海道大学 相澤研究室</span>
             </a>
+            <button class="menu-toggle" aria-label="Toggle menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
             <ul class="nav-links">
                 <li><a href="https://www.n-aizawa.com">Home</a></li>
                 <li><a href="members.html">Members</a></li>
@@ -375,8 +545,8 @@
                 <h1>Research Topics</h1>
             </div>
         </div>
-        
     </div>
+
     <div class="content-section">
         <div class="intro-text fade-in">
         </div>
@@ -388,7 +558,7 @@
                     <div class="research-label">Materials Development</div>
                     <h2>Inverted Singlet-Triplet Materials</h2>
                     <p>
-                        We pioneer the design and synthesis of molecules with inverted singlet and triplet excited states (IST), where the lowest triplet state lies energetically above the lowest singlet state, violating the famous Hund’s rule.
+                        We pioneer the design and synthesis of molecules with inverted singlet and triplet excited states (IST), where the lowest triplet state lies energetically above the lowest singlet state, violating the famous Hund's rule.
                     </p>
                     <p>
                         This unusual electronic structure enables highly efficient organic light-emitting diodes (OLEDs) by facilitating rapid reverse intersystem crossing and eliminating triplet-related efficiency losses.
@@ -396,7 +566,7 @@
                     <div class="research-highlights">
                         <h4>Key Publications</h4>
                         <ul>
-                            <li> <a href="https://doi.org/10.1038/s41586-022-05132-y" target="_blank">N. Aizawa et al. <em>Nature</em>  <strong>2022</strong>, <em>609</em>, 502.</a></li>
+                            <li><a href="https://doi.org/10.1038/s41586-022-05132-y" target="_blank">N. Aizawa et al. <em>Nature</em> <strong>2022</strong>, <em>609</em>, 502.</a></li>
                             <li><a href="https://doi.org/10.1063/5.0152834" target="_blank">T. Won et al. <em>Chem. Phys. Rev.</em> <strong>2023</strong>, <em>4</em>, 021310.</a></li>
                         </ul>
                     </div>
@@ -409,95 +579,90 @@
                     <div class="research-label">Computational Approach</div>
                     <h2>Prediction of Spin-Flip Rates</h2>
                     <p>
-                    We develop  geometry optimization and exploration methods on excited-state potential energy surfaces to predict intersystem crossing and reverse intersystem crossing rates in organic molecules.
+                        We develop geometry optimization and exploration methods on excited-state potential energy surfaces to predict intersystem crossing and reverse intersystem crossing rates in organic molecules.
                     </p>
                     <p>
-                    By combining quantum chemical calculations with machine-learning approaches, we accelerate the discovery of molecules with targeted photophysical properties, reducing trial-and-error in experimental synthesis.
+                        By combining quantum chemical calculations with machine-learning approaches, we accelerate the discovery of molecules with targeted photophysical properties, reducing trial-and-error in experimental synthesis.
                     </p>
                     <div class="research-highlights">
                         <h4>Capabilities</h4>
                         <ul>
-                            <li> <a href="https://doi.org/10.1038/s41467-020-17777-2" target="_blank">N. Aizawa et al. <em>Nat. Commun.</em>  <strong>2020</strong>, <em>11</em>, 3909.</a></li>
-                            <li> <a href="https://doi.org/10.1126/sciadv.abe5769" target="_blank">N. Aizawa et al. <em>Sci. Adv.</em>  <strong>2021</strong>, <em>7</em>, 5769.</a></li>
-                            <li> <a href="https://doi.org/10.1039/D5SC01903F" target="_blank">T. Won et al. <em>Cem. Sci.</em>  <strong>2025</strong>, <em>16</em>, 9303.</a></li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-
-            <!--
-            <div class="research-card fade-in stagger-3">
-                <img src="hero-main.png" alt="Device Applications" class="research-image">
-                <div class="research-content">
-                    <div class="research-label">Applications</div>
-                    <h2>Organic Optoelectronic Devices</h2>
-                    <p>
-                        We fabricate and characterize advanced organic electronic devices including OLEDs, organic solar cells, and sensors to demonstrate the practical utility of our molecular designs.
-                    </p>
-                    <p>
-                        Our work focuses on achieving record-breaking device performance through careful control of charge transport, exciton dynamics, and interface engineering.
-                    </p>
-                    <div class="research-highlights">
-                        <h4>Device Metrics</h4>
-                        <ul>
-                            <li>Record efficiency white OLEDs</li>
-                            <li>Ultra-stable device operation</li>
-                            <li>Low-voltage operation</li>
+                            <li><a href="https://doi.org/10.1038/s41467-020-17777-2" target="_blank">N. Aizawa et al. <em>Nat. Commun.</em> <strong>2020</strong>, <em>11</em>, 3909.</a></li>
+                            <li><a href="https://doi.org/10.1126/sciadv.abe5769" target="_blank">N. Aizawa et al. <em>Sci. Adv.</em> <strong>2021</strong>, <em>7</em>, 5769.</a></li>
+                            <li><a href="https://doi.org/10.1039/D5SC01903F" target="_blank">T. Won et al. <em>Chem. Sci.</em> <strong>2025</strong>, <em>16</em>, 9303.</a></li>
                         </ul>
                     </div>
                 </div>
             </div>
         </div>
     </div>
--->
-        <div>
-            
-    </div>
-        <footer>
-            <div class="footer-container">
-                <div class="footer-section">
-                    <h4>Research</h4>
-                    <ul class="footer-links">
-                        <li><a href="research.html">Research Areas</a></li>
-                        <li><a href="publications.html">Publications</a></li>
-                        <li><a href="facilities.html">Facilities</a></li>
-                    </ul>
-                </div>
 
-                <div class="footer-section">
-                    <h4>People</h4>
-                    <ul class="footer-links">
-                        <li><a href="members.html">Members</a></li>
-                        <li><a href="join.html">Join Our Lab </a></li>
-                    </ul>
-                </div>
-
-                <div class="footer-section">
-                    <h4>Contact</h4>
-                    <ul class="footer-links">
-                        <li><a href="/cdn-cgi/l/email-protection#137d3e727a69726472537a70617677773d7b7c786677727a3d72703d7963">Email: n-aizawa @ icredd.hokudai.ac.jp </a></li>
-                        <li><a>Phone: +81(0)-6-6879-4585</a></li>
-                    </ul>
-                </div>
-
-                <div class="footer-section">
-                    <h4>Location</h4>
-                    <ul class="footer-links">
-                        <li><a href="https://maps.app.goo.gl/L5B2dskNCxqtGrfs7">Kita Campus, Building 8, Room 02-103
-                            Kita 21, Nishi 10, Kita-ku
-                            Sapporo 001-0021
-                            Japan</a></li>
-                    </ul>
-                </div>
+    <footer>
+        <div class="footer-container">
+            <div class="footer-section">
+                <h4>Research</h4>
+                <ul class="footer-links">
+                    <li><a href="research.html">Research Areas</a></li>
+                    <li><a href="publications.html">Publications</a></li>
+                    <li><a href="facilities.html">Facilities</a></li>
+                </ul>
             </div>
 
-            <div class="footer-bottom">
-                © 2026 Aizawa Research Group, ICReDD, Hokkaido University
+            <div class="footer-section">
+                <h4>People</h4>
+                <ul class="footer-links">
+                    <li><a href="members.html">Members</a></li>
+                    <li><a href="join.html">Join Our Lab</a></li>
+                </ul>
             </div>
-        </footer>
+
+            <div class="footer-section">
+                <h4>Contact</h4>
+                <ul class="footer-links">
+                    <li><a href="/cdn-cgi/l/email-protection#5d33703c34273c2a3c1d343e2f3839397335323628393c34733c3e73372d">Email: n-aizawa @ icredd.hokudai.ac.jp</a></li>
+                    <li><a>Phone: +81(0)-6-6879-4585</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-section">
+                <h4>Location</h4>
+                <ul class="footer-links">
+                    <li><a href="https://maps.app.goo.gl/L5B2dskNCxqtGrfs7">Kita Campus, Building 8, Room 02-103<br>
+                        Kita 21, Nishi 10, Kita-ku<br>
+                        Sapporo 001-0021<br>
+                        Japan</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            © 2026 Aizawa Research Group, ICReDD, Hokkaido University
+        </div>
+    </footer>
 
     <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
-        // Smooth parallax effect for hero image
+        const menuToggle = document.querySelector('.menu-toggle');
+        const navLinks = document.querySelector('.nav-links');
+
+        menuToggle.addEventListener('click', () => {
+            menuToggle.classList.toggle('active');
+            navLinks.classList.toggle('active');
+        });
+
+        document.addEventListener('click', (e) => {
+            if (!e.target.closest('.nav-container')) {
+                menuToggle.classList.remove('active');
+                navLinks.classList.remove('active');
+            }
+        });
+
+        navLinks.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                menuToggle.classList.remove('active');
+                navLinks.classList.remove('active');
+            });
+        });
+
         window.addEventListener('scroll', () => {
             const scrolled = window.pageYOffset;
             const hero = document.querySelector('.hero-banner img');
@@ -508,8 +673,7 @@
                 heroOverlay.style.opacity = 1 + (scrolled * 0.001);
             }
         });
-        
-        // Intersection Observer for fade-in animations
+
         const observerOptions = {
             threshold: 0.1,
             rootMargin: '0px 0px -50px 0px'

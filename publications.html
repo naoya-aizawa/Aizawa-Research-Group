@@ -44,7 +44,7 @@
         .nav-container {
             max-width: 1400px;
             margin: 0 auto;
-            padding: 20px 40px;
+            padding: 15px 20px;
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -52,7 +52,7 @@
 
         .logo {
             font-family: var(--font-serif);
-            font-size: 20px;
+            font-size: 16px;
             font-weight: 600;
             color: var(--color-text);
             text-decoration: none;
@@ -62,7 +62,7 @@
         }
 
         .logo-img {
-            height: 32px;
+            height: 28px;
             width: auto;
         }
 
@@ -278,6 +278,162 @@
         .stagger-3 { animation-delay: 0.3s; }
         .stagger-4 { animation-delay: 0.4s; }
         .stagger-5 { animation-delay: 0.5s; }
+    
+        .logo-text-mobile {
+            display: none;
+        }
+        
+        .logo-text-desktop {
+            display: inline;
+        }
+
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 8px;
+            z-index: 1001;
+        }
+
+        .menu-toggle span {
+            width: 25px;
+            height: 2px;
+            background-color: var(--color-text);
+            transition: all 0.3s ease;
+        }
+
+        .menu-toggle.active span:nth-child(1) {
+            transform: rotate(45deg) translate(7px, 7px);
+        }
+
+        .menu-toggle.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .menu-toggle.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(6px, -6px);
+        }
+
+        @media (max-width: 768px) {
+            .logo-text-mobile {
+                display: inline;
+            }
+            
+            .logo-text-desktop {
+                display: none;
+            }
+            
+            body {
+                overflow-x: hidden;
+            }
+            
+            .logo {
+                font-size: 14px;
+                gap: 8px;
+            }
+
+            .logo-img {
+                height: 24px;
+            }
+
+            .logo-text-mobile {
+            display: none;
+        }
+        
+        .logo-text-desktop {
+            display: inline;
+        }
+            
+            .menu-toggle {
+                display: flex;
+            }
+
+            .nav-container {
+                padding: 12px 15px;
+            }
+
+            .nav-links {
+                position: fixed;
+                top: 0;
+                right: -100%;
+                height: 100vh;
+                width: 70%;
+                max-width: 300px;
+                background: rgba(247, 246, 243, 0.98);
+                backdrop-filter: blur(10px);
+                flex-direction: column;
+                padding: 80px 30px 30px;
+                gap: 0;
+                transition: right 0.3s ease;
+                box-shadow: -2px 0 10px rgba(0, 0, 0, 0.1);
+            }
+
+            .nav-links.active {
+                right: 0;
+            }
+
+            .nav-links li {
+                border-bottom: 1px solid var(--color-border);
+            }
+
+            .nav-links a {
+                display: block;
+                padding: 18px 0;
+                font-size: 16px;
+            }
+
+            .hero-banner {
+                height: 250px;
+                margin-top: 48px;
+            }
+
+            .content-section {
+                padding: 30px 15px 40px;
+            }
+
+            .section-title {
+                font-size: 24px;
+                margin-bottom: 20px;
+            }
+
+            .publication-item {
+                padding: 16px;
+                margin-bottom: 12px;
+            }
+
+            .pub-year {
+                font-size: 16px;
+                margin-bottom: 16px;
+            }
+
+            .pub-title {
+                font-size: 15px;
+                margin-bottom: 8px;
+            }
+
+            .pub-authors {
+                font-size: 13px;
+                margin-bottom: 6px;
+            }
+
+            .pub-journal {
+                font-size: 13px;
+                margin-bottom: 10px;
+            }
+
+            .footer-container {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+
+            footer {
+                padding: 40px 15px 20px;
+            }
+        }
+
     </style>
 </head>
 <body>
@@ -285,8 +441,13 @@
         <div class="nav-container">
             <a href="https://www.n-aizawa.com" class="logo">
                 <img src="images/logo.png" alt="Aizawa Research Group Logo" class="logo-img">
-                <span>Aizawa Research Group | 北海道大学 相澤研究室</span>
+                <span><span class="logo-text">Aizawa Research Group</span><span style="display: none;">Aizawa Research Group | 北海道大学 相澤研究室</span></span>
             </a>
+            <button class="menu-toggle" aria-label="Toggle menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
             <ul class="nav-links">
                 <li><a href="https://www.n-aizawa.com">Home</a></li>
                 <li><a href="members.html">Members</a></li>
@@ -732,6 +893,30 @@
     </footer>
 
     <script>
+        
+        const menuToggle = document.querySelector('.menu-toggle');
+        const navLinks = document.querySelector('.nav-links');
+
+        menuToggle.addEventListener('click', () => {
+            menuToggle.classList.toggle('active');
+            navLinks.classList.toggle('active');
+        });
+
+        document.addEventListener('click', (e) => {
+            if (!e.target.closest('.nav-container')) {
+                menuToggle.classList.remove('active');
+                navLinks.classList.remove('active');
+            }
+        });
+
+        navLinks.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                menuToggle.classList.remove('active');
+                navLinks.classList.remove('active');
+            });
+        });
+
+
         const observerOptions = {
             threshold: 0.1,
             rootMargin: '0px 0px -50px 0px'
