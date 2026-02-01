@@ -290,21 +290,7 @@
             color: #ccc;
         }
 
-        /* スマホで「タップして拡大」バッジ（imgには ::after が効かないので wrapper に付与） */
-        @media (hover: none) and (pointer: coarse) {
-            .featured-media::after {
-                content: '🔍 タップして拡大';
-                position: absolute;
-                bottom: 16px;
-                right: 16px;
-                background: rgba(0, 0, 0, 0.6);
-                color: white;
-                padding: 8px 12px;
-                border-radius: 6px;
-                font-size: 12px;
-                pointer-events: none;
-            }
-        }
+
 
         .featured-content {
             padding: 40px;
