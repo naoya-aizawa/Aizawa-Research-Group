@@ -232,6 +232,48 @@
             padding: 24px;
             box-sizing: border-box;
             display: block;
+            cursor: pointer;
+        }
+        
+        /* Image zoom modal for mobile */
+        .image-modal {
+            display: none;
+            position: fixed;
+            z-index: 2000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.9);
+            overflow: auto;
+        }
+        
+        .image-modal.active {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .image-modal-content {
+            max-width: 95%;
+            max-height: 95%;
+            object-fit: contain;
+            margin: auto;
+        }
+        
+        .image-modal-close {
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            color: #fff;
+            font-size: 40px;
+            font-weight: bold;
+            cursor: pointer;
+            z-index: 2001;
+        }
+        
+        .image-modal-close:hover {
+            color: #ccc;
         }
         
 
@@ -532,6 +574,22 @@
             height: auto;
             padding: 20px;
             object-fit: contain;
+            cursor: pointer;
+        }
+        
+        @media (hover: none) and (pointer: coarse) {
+            .featured-image::after {
+                content: '🔍 タップして拡大';
+                position: absolute;
+                bottom: 30px;
+                right: 30px;
+                background: rgba(0, 0, 0, 0.6);
+                color: white;
+                padding: 8px 12px;
+                border-radius: 4px;
+                font-size: 12px;
+                pointer-events: none;
+            }
         }
 
         .footer-container {
@@ -605,18 +663,22 @@
     </section>
 
     <!-- Featured Research -->
-    <a href="https://doi.org/10.1039/D5SC01903F" target="_blank" style="text-decoration:none; color:inherit;">
-   <section class="featured-section">
+    <section class="featured-section">
         <div class="featured-card fade-in stagger-3">
-            <img src="images/news-research-BO.jpg" alt="BO" class="featured-image">
+            <img src="images/news-research-BO.jpg" alt="BO" class="featured-image" id="featuredImage" onclick="openImageModal(event)">
             <div class="featured-content">
                 <div class="featured-label">Featured Research</div>
-                <h2>Bayesian Molecular Optimization for Rapid Reverse Intersystem Crossing</h2>
-                <p>Read More →</p>
+                <h2><a href="https://doi.org/10.1039/D5SC01903F" target="_blank" style="text-decoration:none; color:inherit;">Bayesian Molecular Optimization for Rapid Reverse Intersystem Crossing</a></h2>
+                <p><a href="https://doi.org/10.1039/D5SC01903F" target="_blank" style="text-decoration:none; color:inherit;">Read More →</a></p>
             </div>
         </div>
-    </a>
     </section>
+
+    <!-- Image Modal -->
+    <div id="imageModal" class="image-modal" onclick="closeImageModal()">
+        <span class="image-modal-close" onclick="closeImageModal()">&times;</span>
+        <img src="" alt="Enlarged view" class="image-modal-content" id="modalImage">
+    </div>
 
     <!-- News Section -->
     <section class="news-section">
@@ -794,6 +856,32 @@
                 });
             }
         })();
+
+        // Image Modal Functionality
+        function openImageModal(event) {
+            event.preventDefault();
+            event.stopPropagation();
+            const modal = document.getElementById('imageModal');
+            const modalImg = document.getElementById('modalImage');
+            const img = document.getElementById('featuredImage');
+            
+            modal.classList.add('active');
+            modalImg.src = img.src;
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeImageModal() {
+            const modal = document.getElementById('imageModal');
+            modal.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+
+        // Close modal on Escape key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closeImageModal();
+            }
+        });
     </script>
 </body>
 </html>
