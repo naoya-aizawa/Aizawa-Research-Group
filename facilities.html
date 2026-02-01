@@ -1,0 +1,579 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Facilities | Aizawa Research Group</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Tiempos+Text:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --color-bg: #F7F6F3;
+            --color-text: #191918;
+            --color-accent: #CC785C;
+            --color-border: rgba(25, 25, 24, 0.1);
+            --color-card-bg: #FFFFFF;
+            --font-serif: 'Tiempos Text', Georgia, serif;
+            --font-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-sans);
+            background-color: var(--color-bg);
+            color: var(--color-text);
+            line-height: 1.6;
+        }
+
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(247, 246, 243, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            border-bottom: 1px solid var(--color-border);
+        }
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: var(--font-serif);
+            font-size: 20px;
+            font-weight: 600;
+            color: var(--color-text);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .logo-img {
+            height: 32px;
+            width: auto;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 32px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--color-text);
+            text-decoration: none;
+            font-size: 15px;
+            transition: color 0.2s;
+        }
+
+        .nav-links a:hover {
+            color: var(--color-accent);
+        }
+
+        .page-header {
+            margin-top: 72px;
+            padding: 80px 40px 60px;
+            max-width: 1400px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .page-header h1 {
+            font-family: var(--font-serif);
+            font-size: clamp(42px, 6vw, 64px);
+            margin-bottom: 24px;
+            font-weight: 400;
+        }
+
+        .page-header p {
+            font-size: 20px;
+            color: rgba(25, 25, 24, 0.7);
+            max-width: 800px;
+        }
+
+        .facilities-section {
+            padding: 40px 40px 80px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .category-title {
+            font-family: var(--font-serif);
+            font-size: 32px;
+            margin-bottom: 40px;
+            margin-top: 60px;
+            font-weight: 400;
+            color: var(--color-accent);
+        }
+
+        .category-title:first-child {
+            margin-top: 0;
+        }
+
+        .facilities-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+            gap: 32px;
+            margin-bottom: 40px;
+        }
+
+        .facility-card {
+            background: var(--color-card-bg);
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid var(--color-border);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .facility-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.06);
+        }
+
+        .facility-image {
+            width: 100%;
+            height: 240px;
+            object-fit: cover;
+            background: linear-gradient(135deg, #f5f5f5 0%, #e5e5e5 100%);
+        }
+
+        .facility-info {
+            padding: 24px;
+        }
+
+        .facility-name {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 12px;
+            line-height: 1.4;
+        }
+
+        .facility-name-en {
+            font-size: 14px;
+            color: var(--color-accent);
+            margin-bottom: 12px;
+            font-style: italic;
+        }
+
+        .facility-description {
+            font-size: 15px;
+            color: rgba(25, 25, 24, 0.7);
+            line-height: 1.6;
+        }
+
+        .facility-specs {
+            margin-top: 16px;
+            padding-top: 16px;
+            border-top: 1px solid var(--color-border);
+        }
+
+        .facility-specs ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .facility-specs li {
+            font-size: 14px;
+            color: rgba(25, 25, 24, 0.6);
+            margin-bottom: 4px;
+            padding-left: 16px;
+            position: relative;
+        }
+
+        .facility-specs li:before {
+            content: "•";
+            position: absolute;
+            left: 0;
+            color: var(--color-accent);
+        }
+
+        .collab-notice {
+            background: var(--color-card-bg);
+            border: 2px solid var(--color-accent);
+            border-radius: 12px;
+            padding: 32px;
+            margin-top: 60px;
+            text-align: center;
+        }
+
+        .collab-notice h3 {
+            font-family: var(--font-sans);
+            font-size: 24px;
+            margin-bottom: 16px;
+            color: var(--color-accent);
+        }
+
+        .collab-notice p {
+            font-size: 18px;
+            color: rgba(25, 25, 24, 0.7);
+            max-width: 1600px;
+            margin: 0 auto;
+        }
+
+        footer {
+            background: var(--color-text);
+            color: rgba(255, 255, 255, 0.8);
+            padding: 80px 40px 40px;
+        }
+
+        .footer-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 48px;
+            margin-bottom: 48px;
+        }
+
+        .footer-section h4 {
+            font-family: var(--font-serif);
+            color: white;
+            margin-bottom: 16px;
+            font-size: 18px;
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 12px;
+        }
+
+        .footer-links a {
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            font-size: 15px;
+            transition: color 0.2s;
+        }
+
+        .footer-links a:hover {
+            color: white;
+        }
+
+        .footer-bottom {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding-top: 32px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            text-align: center;
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 0.8s ease-out forwards;
+        }
+
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .facilities-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="nav-container">
+            <a href="https://www.n-aizawa.com" class="logo">
+                <img src="images/logo.png" alt="Aizawa Research Group Logo" class="logo-img">
+                <span>Aizawa Research Group</span>
+            </a>
+            <ul class="nav-links">
+                <li><a href="https://www.n-aizawa.com">Home</a></li>
+                <li><a href="members.html">Members</a></li>
+                <li><a href="research.html">Research</a></li>
+                <li><a href="publications.html">Publications</a></li>
+                <li><a href="facilities.html">Facilities</a></li>
+                <li><a href="join.html">Join</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="page-header fade-in">
+        <h1>Research Facilities</h1>
+    </div>
+
+    <!-- ✅ ここから下：全カテゴリを1つの facilities-section に統合 -->
+    <div class="facilities-section">
+
+        <h2 class="category-title fade-in">Synthesis & Purification</h2>
+        <div class="facilities-grid">
+            <div class="facility-card fade-in">
+                <img src="images/equipment-placeholder.png" alt="Globe Box" class="facility-image">
+                <div class="facility-info">
+                    <h3 class="facility-name">グローブボックス</h3>
+                    <p class="facility-name-en">Globe Box</p>
+                </div>
+            </div>
+
+            <div class="facility-card fade-in">
+                <img src="images/equipment-placeholder.png" alt="Microwave Reactor" class="facility-image">
+                <div class="facility-info">
+                    <h3 class="facility-name">マイクロウェーブ合成装置</h3>
+                    <p class="facility-name-en">Microwave Reactor</p>
+                </div>
+            </div>
+
+            <div class="facility-card fade-in">
+                <img src="images/equipment-placeholder.png" alt="Rotary evaporator" class="facility-image">
+                <div class="facility-info">
+                    <h3 class="facility-name">ロータリーエバポレーター</h3>
+                    <p class="facility-name-en">Rotary evaporator</p>
+                </div>
+            </div>
+
+            <div class="facility-card fade-in">
+                <img src="images/facilities-自動カラム装置.jpg" alt="Flash Chromatography" class="facility-image">
+                <div class="facility-info">
+                    <h3 class="facility-name">自動カラム装置</h3>
+                    <p class="facility-name-en">Flash Chromatography System</p>
+                </div>
+            </div>
+
+            <div class="facility-card fade-in">
+                <img src="images/facilities-リサイクル分取GPC.jpg" alt="Recycling GPC" class="facility-image">
+                <div class="facility-info">
+                    <h3 class="facility-name">リサイクル分取GPC</h3>
+                    <p class="facility-name-en">Recycling Preparative GPC</p>
+                </div>
+            </div>
+
+            <div class="facility-card fade-in">
+                <img src="images/facilities-昇華精製装置.jpg" alt="Sublimation System" class="facility-image">
+                <div class="facility-info">
+                    <h3 class="facility-name">昇華精製装置</h3>
+                    <p class="facility-name-en">Sublimation Purification System</p>
+                </div>
+            </div>
+
+            <div class="facility-card fade-in">
+                <img src="images/facilities-ASAP-MS装置.jpg" alt="ASAP-MS" class="facility-image">
+                <div class="facility-info">
+                    <h3 class="facility-name">ASAP-MS装置</h3>
+                    <p class="facility-name-en">ASAP Mass Spectrometer</p>
+                </div>
+            </div>
+
+            <div class="facility-card fade-in">
+                <img src="images/equipment-placeholder.png" alt="LC/MS System" class="facility-image">
+                <div class="facility-info">
+                    <h3 class="facility-name">LC/MSシステム</h3>
+                    <p class="facility-name-en">LC/MS System</p>
+                </div>
+            </div>
+        </div>
+
+        <h2 class="category-title fade-in">Optical Spectroscopy</h2>
+        <div class="facilities-grid">
+            <div class="facility-card fade-in">
+                <img src="images/facilities-定常・過渡蛍光分光装置.jpg" alt="Fluorometer" class="facility-image">
+                <div class="facility-info">
+                    <h3 class="facility-name">定常・過渡蛍光分光装置</h3>
+                    <p class="facility-name-en">Steady-state and Transient Fluorometer</p>
+                </div>
+            </div>
+
+            <div class="facility-card fade-in">
+                <img src="images/facilities-過渡吸収分光装置.jpg" alt="Transient Absorption" class="facility-image">
+                <div class="facility-info">
+                    <h3 class="facility-name">過渡吸収分光装置</h3>
+                    <p class="facility-name-en">Transient Absorption Spectrometer</p>
+                </div>
+            </div>
+
+            <div class="facility-card fade-in">
+                <img src="images/facilities-UV-vis分光装置.jpg" alt="UV-vis Spectrophotometer" class="facility-image">
+                <div class="facility-info">
+                    <h3 class="facility-name">UV-vis分光装置</h3>
+                    <p class="facility-name-en">UV-Vis Spectrometer</p>
+                </div>
+            </div>
+
+            <div class="facility-card fade-in">
+                <img src="images/facilities-積分球システム.jpg" alt="Integrating Sphere" class="facility-image">
+                <div class="facility-info">
+                    <h3 class="facility-name">積分球システム</h3>
+                    <p class="facility-name-en">Integrated Sphere System</p>
+                </div>
+            </div>
+
+            <div class="facility-card fade-in">
+                <img src="images/facilities-ファイバー分光器.jpg" alt="Fiber Spectrometer" class="facility-image">
+                <div class="facility-info">
+                    <h3 class="facility-name">ファイバー分光器</h3>
+                    <p class="facility-name-en">Fiber Spectrometer</p>
+                </div>
+            </div>
+
+            <div class="facility-card fade-in">
+                <img src="images/facilities-分光エリプソメーター.jpg" alt="Spectroscopic Ellipsometer" class="facility-image">
+                <div class="facility-info">
+                    <h3 class="facility-name">分光エリプソメーター</h3>
+                    <p class="facility-name-en">Spectroscopic Ellipsometer</p>
+                </div>
+            </div>
+
+            <div class="facility-card fade-in">
+                <img src="images/facilities-分光用クライオスタット.jpg" alt="Cryostat" class="facility-image">
+                <div class="facility-info">
+                    <h3 class="facility-name">分光用クライオスタット</h3>
+                    <p class="facility-name-en">Optical Cryostat</p>
+                </div>
+            </div>
+
+            <div class="facility-card fade-in">
+                <img src="images/facilities-小型分光用クライオスタット.jpg" alt="Compact Cryostat" class="facility-image">
+                <div class="facility-info">
+                    <h3 class="facility-name">小型クライオスタット</h3>
+                    <p class="facility-name-en">Compact Cryostat</p>
+                </div>
+            </div>
+
+            <div class="facility-card fade-in">
+                <img src="images/facilities-分光用電磁石.jpg" alt="Electromagnet" class="facility-image">
+                <div class="facility-info">
+                    <h3 class="facility-name">電磁石</h3>
+                    <p class="facility-name-en">Electromagnet</p>
+                </div>
+            </div>
+        </div>
+
+        <h2 class="category-title fade-in">OLED Fabrication & Characterization</h2>
+        <div class="facilities-grid">
+            <div class="facility-card fade-in">
+                <img src="images/facilities-真空蒸着装置.jpg" alt="Vacuum Evaporator" class="facility-image">
+                <div class="facility-info">
+                    <h3 class="facility-name">真空蒸着装置</h3>
+                    <p class="facility-name-en">Vacuum Evaporation System</p>
+                </div>
+            </div>
+
+            <div class="facility-card fade-in">
+                <img src="images/facilities-放射輝度計.jpg" alt="Luminance Meter" class="facility-image">
+                <div class="facility-info">
+                    <h3 class="facility-name">放射輝度計</h3>
+                    <p class="facility-name-en">Radiance Meter</p>
+                </div>
+            </div>
+
+            <div class="facility-card fade-in">
+                <img src="images/facilities-有機EL寿命評価装置.jpg" alt="OLED Lifetime Tester" class="facility-image">
+                <div class="facility-info">
+                    <h3 class="facility-name">有機EL寿命評価装置</h3>
+                    <p class="facility-name-en">OLED Lifetime Evaluation System</p>
+                </div>
+            </div>
+
+            <div class="facility-card fade-in">
+                <img src="images/facilities-ソースメーター.jpg" alt="Source Meter" class="facility-image">
+                <div class="facility-info">
+                    <h3 class="facility-name">ソースメーター</h3>
+                    <p class="facility-name-en">Source Meter</p>
+                </div>
+            </div>
+
+            <div class="facility-card fade-in">
+                <img src="images/facilities-ファンクションジェネレーター.jpg" alt="Function Generator" class="facility-image">
+                <div class="facility-info">
+                    <h3 class="facility-name">ファンクションジェネレーター</h3>
+                    <p class="facility-name-en">Function Generator</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="collab-notice fade-in">
+            <h3>Shared Facilities at ICReDD</h3>
+            <p>Shared facilities at ICReDD are also available, including NMR spectrometers, CD and CPL spectrometers, and large CPU and GPU resources.</p>
+        </div>
+
+    </div>
+    <!-- ✅ ここまで：1つの facilities-section -->
+
+    <footer>
+        <div class="footer-container">
+            <div class="footer-section">
+                <h4>Research</h4>
+                <ul class="footer-links">
+                    <li><a href="research.html">Research Areas</a></li>
+                    <li><a href="publications.html">Publications</a></li>
+                    <li><a href="facilities.html">Facilities</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-section">
+                <h4>People</h4>
+                <ul class="footer-links">
+                    <li><a href="members.html">Members</a></li>
+                    <li><a href="join.html">Join Our Lab </a></li>
+                </ul>
+            </div>
+
+            <div class="footer-section">
+                <h4>Contact</h4>
+                <ul class="footer-links">
+                    <li><a href="/cdn-cgi/l/email-protection#137d3e727a69726472537a70617677773d7b7c786677727a3d72703d7963">Email: n-aizawa @ icredd.hokudai.ac.jp </a></li>
+                    <li><a>Phone: +81(0)-6-6879-4585</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-section">
+                <h4>Location</h4>
+                <ul class="footer-links">
+                    <li><a href="https://maps.app.goo.gl/L5B2dskNCxqtGrfs7">Kita Campus, Building 8, Room 02-103
+                        Kita 21, Nishi 10, Kita-ku
+                        Sapporo 001-0021
+                        Japan</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            © 2026 Aizawa Research Group, ICReDD, Hokkaido University
+        </div>
+    </footer>
+
+    <script>
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.animationPlayState = 'running';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.fade-in').forEach(el => {
+            el.style.animationPlayState = 'paused';
+            observer.observe(el);
+        });
+    </script>
+</body>
+</html>
+

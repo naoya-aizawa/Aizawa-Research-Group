@@ -1,0 +1,751 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Publications | Aizawa Research Group</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Tiempos+Text:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --color-bg: #F7F6F3;
+            --color-text: #191918;
+            --color-accent: #CC785C;
+            --color-border: rgba(25, 25, 24, 0.1);
+            --color-card-bg: #FFFFFF;
+            --font-serif: 'Tiempos Text', Georgia, serif;
+            --font-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-sans);
+            background-color: var(--color-bg);
+            color: var(--color-text);
+            line-height: 1.6;
+        }
+
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(247, 246, 243, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            border-bottom: 1px solid var(--color-border);
+        }
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: var(--font-serif);
+            font-size: 20px;
+            font-weight: 600;
+            color: var(--color-text);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .logo-img {
+            height: 32px;
+            width: auto;
+        }
+
+
+        .nav-links {
+            display: flex;
+            gap: 32px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--color-text);
+            text-decoration: none;
+            font-size: 15px;
+            transition: color 0.2s;
+        }
+
+        .nav-links a:hover {
+            color: var(--color-accent);
+        }
+
+        .hero-banner {
+            margin-top: 72px;
+            height: 350px;
+            background: linear-gradient(135deg, #191918 0%, #2D2D2C 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-banner img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 1.0;
+        }
+
+        .hero-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(25, 25, 24, 0.8) 0%, rgba(45, 45, 44, 0.6) 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .hero-text {
+            color: white;
+            text-align: center;
+            z-index: 10;
+        }
+
+        .hero-text h1 {
+            font-family: var(--font-serif);
+            font-size: clamp(42px, 6vw, 64px);
+            margin-bottom: 16px;
+            font-weight: 400;
+            transform: translateY(30px);
+            animation: heroFadeIn 1.2s ease-out 0.3s forwards;
+        }
+        .hero-text p {
+            font-size: 20px;
+            opacity: 0.9;
+        }
+
+        .hero-text h1 {
+            font-family: var(--font-serif);
+            font-size: clamp(42px, 6vw, 64px);
+            margin-bottom: 16px;
+            font-weight: 400;
+        }
+
+        .hero-text p {
+            font-size: 20px;
+            opacity: 0.9;
+        }
+
+        .content-section {
+            padding: 80px 40px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .publication {
+            background: var(--color-card-bg);
+            padding: 32px;
+            margin-bottom: 24px;
+            border-radius: 12px;
+            border: 1px solid var(--color-border);
+            transition: transform 0.3s, box-shadow 0.3s;
+            display: flex;
+            gap: 24px;
+        }
+
+        .publication:hover {
+            transform: translateX(4px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.06);
+        }
+
+        .pub-number {
+            font-family: var(--font-serif);
+            font-size: 24px;
+            font-weight: 600;
+            color: var(--color-accent);
+            min-width: 50px;
+            flex-shrink: 0;
+        }
+
+        .pub-content {
+            flex: 1;
+        }
+
+        .pub-title {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 12px;
+            line-height: 1.5;
+            color: var(--color-text);
+        }
+
+        .pub-title a {
+            color: var(--color-text);
+            text-decoration: none;
+        }
+
+        .pub-title a:hover {
+            color: var(--color-accent);
+        }
+
+        .pub-authors {
+            font-size: 15px;
+            color: rgba(25, 25, 24, 0.7);
+            margin-bottom: 8px;
+        }
+
+        .pub-journal {
+            font-size: 15px;
+            color: rgba(25, 25, 24, 0.6);
+            margin-bottom: 16px;
+        }
+
+        footer {
+            background: var(--color-text);
+            color: rgba(255, 255, 255, 0.8);
+            padding: 80px 40px 40px;
+        }
+
+        .footer-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 48px;
+            margin-bottom: 48px;
+        }
+
+        .footer-section h4 {
+            font-family: var(--font-serif);
+            color: white;
+            margin-bottom: 16px;
+            font-size: 18px;
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 12px;
+        }
+
+        .footer-links a {
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            font-size: 15px;
+            transition: color 0.2s;
+        }
+
+        .footer-links a:hover {
+            color: white;
+        }
+
+        .footer-bottom {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding-top: 32px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            text-align: center;
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 0.8s ease-out forwards;
+        }
+
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .stagger-1 { animation-delay: 0.1s; }
+        .stagger-2 { animation-delay: 0.2s; }
+        .stagger-3 { animation-delay: 0.3s; }
+        .stagger-4 { animation-delay: 0.4s; }
+        .stagger-5 { animation-delay: 0.5s; }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="nav-container">
+            <a href="https://www.n-aizawa.com" class="logo">
+                <img src="images/logo.png" alt="Aizawa Research Group Logo" class="logo-img">
+                <span>Aizawa Research Group</span>
+            </a>
+            <ul class="nav-links">
+                <li><a href="https://www.n-aizawa.com">Home</a></li>
+                <li><a href="members.html">Members</a></li>
+                <li><a href="research.html">Research</a></li>
+                <li><a href="publications.html">Publications</a></li>
+                <li><a href="facilities.html">Facilities</a></li>
+                <li><a href="join.html">Join</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="hero-banner">
+        <img src="images/publications-hero.jpg" alt="Publications">
+        <div class="hero-overlay">
+            <div class="hero-text">
+                <h1>Publications</h1>
+                <p> </p>
+            </div>
+        </div>
+    </div>
+
+    <div class="content-section">
+        <div class="publication fade-in stagger-1">
+            <div class="pub-number">42</div>
+            <div class="pub-content">
+                <h3 class="pub-title"><a href="https://doi.org/10.1039/D5TC02150B">White Organic Light-Emitting Diodes with Extremely Low Turn-on Voltage at 1.5 V</a></h3>
+                <p class="pub-authors">Yang Yiyan, Qing-Jun Shui, Hiroto Iwasaki, Daiki Nakahigashi, Yutaka Majima, Ken-ichi Nakayama, Naoya Aizawa, Seiichiro Izawa*</p>
+                <p class="pub-journal"><em>J. Mater. Chem. C</em> <strong>2025</strong>, <em>13</em>, 16963–16968.</p>
+            </div>
+        </div>
+
+        <div class="publication fade-in stagger-2">
+            <div class="pub-number">41</div>
+            <div class="pub-content">
+                <h3 class="pub-title"><a href="https://doi.org/10.1021/jacs.5c09695">Highly Porous, Electrically Conductive Two-Dimensional Nickel–Hexaaminodehydrobenzoannulene Frameworks</a></h3>
+                <p class="pub-authors">Enzo Ohkubo, Mitsuharu Suzuki,* Naoya Aizawa, Osamu Ikeda, Showa Kitajima, Tomoyuki Koganezawa, Kaoru Ohta, Kouki Oka, Norimitsu Tohnai, Keisuke Tominaga, Ken-ichi Nakayama</p>
+                <p class="pub-journal"><em>J. Am. Chem. Soc.</em> <strong>2025</strong>, <em>147</em>, 31940–31951.</p>
+            </div>
+        </div>
+
+        <div class="publication fade-in stagger-3">
+            <div class="pub-number">40</div>
+            <div class="pub-content">
+                <h3 class="pub-title"><a href="https://doi.org/10.1002/adom.202501279">Triplet-Triplet Annihilation Photon Upconversion Using TIPS-Benzene and Heptazine Derivatives for UVC Energy Generation</a></h3>
+                <p class="pub-authors">Masanori Uji, Sakura Nakagawa, Atsuko Nihonyanagi, Daigo Miyajima, Naoya Aizawa, Nobuhiro Yanai*</p>
+                <p class="pub-journal"><em>Adv. Opt. Mater.</em> <strong>2025</strong>, e01279.</p>
+            </div>
+        </div>
+
+        <div class="publication fade-in stagger-4">
+            <div class="pub-number">39</div>
+            <div class="pub-content">
+                <h3 class="pub-title"><a href="https://doi.org/10.1039/D5SC01903F">Bayesian Molecular Optimization for Accelerating Reverse Intersystem Crossing</a></h3>
+                <p class="pub-authors">Taehyun Won, Naoya Aizawa,* Yu Harabuchi,* Reo Kurihara, Mitsuharu Suzuki, Satoshi Maeda, Yong-Jin Pu, Ken-ichi Nakayama</p>
+                <p class="pub-journal"><em>Chem. Sci.</em> <strong>2025</strong>, <em>16</em>, 9303–9310.</p>
+            </div>
+        </div>
+
+        <div class="publication fade-in stagger-5">
+            <div class="pub-number">38</div>
+            <div class="pub-content">
+                <h3 class="pub-title"><a href="https://doi.org/10.1021/acs.jpcc.5c00333">Thermally Activated Delayed Fluorescence (TADF) Active Systems: Mechanism, Applications, and Future Directions</a></h3>
+                <p class="pub-authors">Naoya Aizawa,* Ricardo Javier Vázquez*</p>
+                <p class="pub-journal"><em>J. Phys. Chem. C</em> <strong>2025</strong>, <em>129</em>, 3359–3360.</p>
+            </div>
+        </div>
+
+        <div class="publication fade-in">
+            <div class="pub-number">37</div>
+            <div class="pub-content">
+                <h3 class="pub-title"><a href="https://doi.org/10.1063/5.0250413">Dynamic excitons in organic light-emitting systems</a></h3>
+                <p class="pub-authors">Katsuaki Suzuki, Eri Sakuda, Yosuke Tani, Midori Akiyama, Ken Albrecht, Naoya Aizawa, Seiichiro Izawa, Hironori Kaji*</p>
+                <p class="pub-journal"><em>J. Chem. Phys.</em> <strong>2025</strong>, <em>162</em>, 061001.</p>
+            </div>
+        </div>
+
+        <div class="publication fade-in">
+            <div class="pub-number">36</div>
+            <div class="pub-content">
+                <h3 class="pub-title"><a href="https://doi.org/10.1038/s41598-024-78971-6">Defect engineering in organic semiconductor based metal-dielectric photonic crystals</a></h3>
+                <p class="pub-authors">Khadga S. Thakuri, Thomas Cleary, David Allemeier, Taisei Kimura, Naoya Aizawa, Ken-ichi Nakayama, Akito Masuhara, Matthew S. White*</p>
+                <p class="pub-journal"><em>Sci. Rep.</em> <strong>2024</strong>, <em>14</em>, 29052.</p>
+            </div>
+        </div>
+
+        <div class="publication fade-in">
+            <div class="pub-number">35</div>
+            <div class="pub-content">
+                <h3 class="pub-title"><a href="https://doi.org/10.1063/5.0152834">Inverted singlet–triplet emitters for organic light-emitting diodes</a></h3>
+                <p class="pub-authors">Taehyun Won, Ken-ichi Nakayama, Naoya Aizawa*</p>
+                <p class="pub-journal"><em>Chem. Phys. Rev.</em> <strong>2023</strong>, <em>4</em>, 021310.</p>
+            </div>
+        </div>
+
+        <div class="publication fade-in">
+            <div class="pub-number">34</div>
+            <div class="pub-content">
+                <h3 class="pub-title"><a href="https://doi.org/10.1021/jacs.2c11520">Possibilities and Limitations in Monomer Combinations for Ternary Two-Dimensional Covalent Organic Frameworks</a></h3>
+                <p class="pub-authors">Mitsuharu Suzuki,* Masashi Miura, Enzo Ohkubo, Haru Karimata, Naoya Aizawa, Hiroko Yamada, Ken-ichi Nakayama*</p>
+                <p class="pub-journal"><em>J. Am. Chem. Soc.</em> <strong>2023</strong>, <em>145</em>, 3008–3015.</p>
+            </div>
+        </div>
+
+        <div class="publication fade-in">
+            <div class="pub-number">33</div>
+            <div class="pub-content">
+                <h3 class="pub-title"><a href="https://doi.org/10.1038/s41586-022-05132-y">Delayed fluorescence from inverted singlet and triplet excited states</a></h3>
+                <p class="pub-authors">Naoya Aizawa,* Yong-Jin Pu,* Yu Harabuchi, Atsuko Nihonyanagi, Ryotaro Ibuka, Hiroyuki Inuzuka, Barun Dhara, Yuki Koyama, Ken-ichi Nakayama, Satoshi Maeda, Fumito Araoka, Daigo Miyajima*</p>
+                <p class="pub-journal"><em>Nature</em> <strong>2022</strong>, <em>609</em>, 502–506.</p>
+            </div>
+        </div>
+
+        <div class="publication fade-in">
+            <div class="pub-number">32</div>
+            <div class="pub-content">
+                <h3 class="pub-title"><a href="https://doi.org/10.1016/j.cej.2022.134728">Dual-acceptor thermally activated delayed fluorescence emitters: Achieving high efficiency and long lifetime in orange-red OLEDs</a></h3>
+                <p class="pub-authors">Xiaoxiao Hu, Naoya Aizawa, Minjun Kim, Miaofei Huang, Zhiyi Li, Guanhao Liu, Honglei Gao, Teng Gao, Xiangyu Dong, Yong Zhang, Jianjun Liu, Pengfei Wang, Yuanping Yi,* Yong-Jin Pu, Ying Wang*</p>
+                <p class="pub-journal"><em>Chem. Eng. J.</em> <strong>2022</strong>, <em>434</em>, 134728.</p>
+            </div>
+        </div>
+
+        <div class="publication fade-in">
+            <div class="pub-number">31</div>
+            <div class="pub-content">
+                <h3 class="pub-title"><a href="https://doi.org/10.6084/m9.figshare.14428766">Electron spin resonance resolves intermediate triplet states in delayed fluorescence</a></h3>
+                <p class="pub-authors">Bluebell H. Drummond, Naoya Aizawa, Yadong Zhang, William K. Myers, Yao Xiong, Matthew W. Cooper, Stephen Barlow, Qinying Gu, Leah R. Weiss, Alexander J. Gillett, Dan Credgington, Yong-Jin Pu, Seth R. Marder, Emrys W. Evans*</p>
+                <p class="pub-journal"><em>Nat. Commun.</em> <strong>2021</strong>, <em>12</em>, 4532.</p>
+            </div>
+        </div>
+
+        <div class="publication fade-in">
+            <div class="pub-number">30</div>
+            <div class="pub-content">
+                <h3 class="pub-title"><a href="https://pubs.acs.org/doi/10.1021/acs.jpcc.1c05140">Energy Transfer from Blue-Emitting CsPbBr3 Perovskite Nanocrystals to Green-Emitting CsPbBr3 Perovskite Nanocrystals</a></h3>
+                <p class="pub-authors">Kazushi Enomoto, Risa Oizumi, Naoya Aizawa, Takayuki Chiba, Yong-Jin Pu*</p>
+                <p class="pub-journal"><em>J. Phys. Chem. C</em> <strong>2021</strong>, <em>125</em>, 19368–19373.</p>
+            </div>
+        </div>
+
+        <div class="publication fade-in">
+            <div class="pub-number">29</div>
+            <div class="pub-content">
+                <h3 class="pub-title"><a href="https://doi.org/10.1002/asia.202100538">Regulation of Multicolor Fluorescence Changes Found in Donor–acceptor–type Mechanochromic Fluorescent Dyes</a></h3>
+                <p class="pub-authors">Tsutomu Ishi-i,* Honoka Tanaka, Rihoko Kichise, Christopher Davin, Takaaki Matsuda, Naoya Aizawa, In Seob Park, Takuma Yasuda, Taisuke Matsumoto</p>
+                <p class="pub-journal"><em>Chem. Asian J.</em> <strong>2021</strong>, <em>16</em>, 2136–2145.</p>
+            </div>
+        </div>
+
+        <div class="publication fade-in">
+            <div class="pub-number">28</div>
+            <div class="pub-content">
+                <h3 class="pub-title"><a href="https://doi.org/10.1126/sciadv.abe5769">Thermal equilibration between singlet and triplet excited states in organic fluorophore for submicrosecond delayed fluorescence</a></h3>
+                <p class="pub-authors">Naoya Aizawa, Akinobu Matsumoto, Takuma Yasuda*</p>
+                <p class="pub-journal"><em>Sci. Adv.</em> <strong>2021</strong>, <em>7</em>, 5769.</p>
+            </div>
+        </div>
+
+        <div class="publication fade-in">
+            <div class="pub-number">27</div>
+            <div class="pub-content">
+                <h3 class="pub-title"><a href="https://doi.org/10.1038/s41467-020-17777-2">Kinetic prediction of reverse intersystem crossing in organic donor–acceptor molecules</a></h3>
+                <p class="pub-authors">Naoya Aizawa,* Yu Harabuchi,* Satoshi Maeda, Yong-Jin Pu</p>
+                <p class="pub-journal"><em>Nat. Commun.</em> <strong>2020</strong>, <em>11</em>, 3909.</p>
+            </div>
+        </div>
+
+        <div class="publication fade-in">
+            <div class="pub-number">26</div>
+            <div class="pub-content">
+                <h3 class="pub-title"><a href="https://doi.org/10.1063/5.0007389">Molecular beam epitaxy of high-quality CuI thin films on a low temperature grown buffer layer</a></h3>
+                <p class="pub-authors">S. Inagaki, M. Nakamura,* N. Aizawa, L. C. Peng, X. Z. Yu, Y. Tokura, M. Kawasaki</p>
+                <p class="pub-journal"><em>Appl. Phys. Lett.</em> <strong>2020</strong>, <em>116</em>, 192105.</p>
+            </div>
+        </div>
+
+        <div class="publication fade-in">
+            <div class="pub-number">25</div>
+            <div class="pub-content">
+                <h3 class="pub-title"><a href="https://doi.org/10.1021/acs.jpcc.0c01499">Selenium Substitution Enhances Reverse Intersystem Crossing in a Delayed Fluorescence Emitter</a></h3>
+                <p class="pub-authors">Bluebell H. Drummond, Gabrielle C. Hoover, Alexander J. Gillett, Naoya Aizawa, William K. Myers, Bryony T. McAllister, Saul T. E. Jones, Yong-Jin Pu, Dan Credgington,* Dwight S. Seferos*</p>
+                <p class="pub-journal"><em>J. Phys. Chem. C</em> <strong>2020</strong>, <em>124</em>, 6364–6370.</p>
+            </div>
+        </div>
+
+        <div class="publication fade-in">
+            <div class="pub-number">24</div>
+            <div class="pub-content">
+                <h3 class="pub-title"><a href="https://doi.org/10.1002/chem.201903476">Synthesis of Anthracene Derivatives with Azaacene–Containing Iptycene Wings and the Utilization as a Dopant for Solution–Processed Organic Light–Emitting Diodes</a></h3>
+                <p class="pub-authors">Hironobu Hayashi,* Yuki Kato, Akinobu Matsumoto, So Shikita, Naoya Aizawa, Mitsuharu Suzuki, Naoki Aratani, Takuma Yasuda, Hiroko Yamada*</p>
+                <p class="pub-journal"><em>Chem. Eur. J.</em> <strong>2019</strong>, <em>25</em>, 15565–15571.</p>
+            </div>
+        </div>
+
+        <div class="publication fade-in">
+            <div class="pub-number">23</div>
+            <div class="pub-content">
+                <h3 class="pub-title"><a href="https://doi.org/10.1002/chem.201903100">Room–Temperature Phosphorescence from a Series of 3–Pyridylcarbazole Derivatives</a></h3>
+                <p class="pub-authors">Hisahiro Sasabe,* Yuki Kato, Yuichiro Watanabe, Tatsuya Ohsawa, Naoya Aizawa, Wataru Fujiwara, Yong–Jin Pu, Hiroshi Katagiri, Junji Kido*</p>
+                <p class="pub-journal"><em>Chem. Eur. J.</em> <strong>2019</strong>, <em>25</em>, 16294–16300.</p>
+            </div>
+        </div>
+
+        <div class="publication fade-in">
+            <div class="pub-number">22</div>
+            <div class="pub-content">
+                <h3 class="pub-title"><a href="https://doi.org/10.1039/C8NJ06050A">Mechanochromic fluorescence based on a combination of acceptor and bulky donor moieties: tuning emission color and regulating emission change direction</a></h3>
+                <p class="pub-authors">Tsutomu Ishi-i,* Honoka Tanaka, Ryusuke Youfu, Naoya Aizawa, Takuma Yasuda, Shin-ichiro Kato, Taisuke Matsumoto</p>
+                <p class="pub-journal"><em>New J. Chem.</em> <strong>2019</strong>, <em>43</em>, 4998–5010.</p>
+            </div>
+        </div>
+
+        <div class="publication fade-in">
+            <div class="pub-number">21</div>
+            <div class="pub-content">
+                <h3 class="pub-title"><a href="https://doi.org/10.1039/C9SC04262H">Exciplex emissions derived from exceptionally long-distance donor and acceptor molecules</a></h3>
+                <p class="pub-authors">Yong-Jin Pu,* Yuki Koyama, Daisuke Otsuki, Minjun Kim, Hiroya Chubachi, Yuki Seino, Kazushi Enomoto, Naoya Aizawa</p>
+                <p class="pub-journal"><em>Chem. Sci.</em> <strong>2019</strong>, <em>10</em>, 9203–9208.</p>
+            </div>
+        </div>
+
+        <div class="publication fade-in">
+            <div class="pub-number">20</div>
+            <div class="pub-content">
+                <h3 class="pub-title"><a href="https://doi.org/10.1021/acsami.8b17056">High-Crystallinity π-Conjugated Small Molecules Based on Thienylene-Vinylene-Thienylene: Critical Role of Self-Organization in Photovoltaic, Charge-Transport, and Morphological Properties</a></h3>
+                <p class="pub-authors">Seiichi Furukawa, Hideaki Komiyama, Naoya Aizawa, Takuma Yasuda*</p>
+                <p class="pub-journal"><em>ACS Appl. Mater. Interfaces</em> <strong>2018</strong>, <em>10</em>, 42756–42765.</p>
+            </div>
+        </div>
+
+        <div class="publication fade-in">
+            <div class="pub-number">19</div>
+            <div class="pub-content">
+                <h3 class="pub-title"><a href="https://doi.org/10.1002/anie.201806863">Modulating Photo- and Electroluminescence in a Stimuli-Responsive π-Conjugated Donor-Acceptor Molecular System</a></h3>
+                <p class="pub-authors">Kohei Isayama, Naoya Aizawa, Jun Yun Kim, Takuma Yasuda*</p>
+                <p class="pub-journal"><em>Angew. Chem. Int. Ed.</em> <strong>2018</strong>, <em>57</em>, 11982–11986.</p>
+            </div>
+        </div>
+
+        <div class="publication fade-in">
+            <div class="pub-number">18</div>
+            <div class="pub-content">
+                <h3 class="pub-title"><a href="https://doi.org/10.1002/adfm.201802031">High-Performance Dibenzoheteraborin-Based Thermally Activated Delayed Fluorescence Emitters: Molecular Architectonics for Concurrently Achieving Narrowband Emission and Efficient Triplet-Singlet Spin Conversion</a></h3>
+                <p class="pub-authors">In Seob Park, Kyohei Matsuo, Naoya Aizawa, Takuma Yasuda*</p>
+                <p class="pub-journal"><em>Adv. Funct. Mater.</em> <strong>2018</strong>, <em>28</em>, 1802031.</p>
+            </div>
+        </div>
+
+        <div class="publication fade-in">
+            <div class="pub-number">17</div>
+            <div class="pub-content">
+                <h3 class="pub-title"><a href="https://doi.org/10.1039/C7TC05709A">Molecular engineering of phosphacycle-based thermally activated delayed fluorescence materials for deep-blue OLEDs</a></h3>
+                <p class="pub-authors">Jiyoung Lee, Naoya Aizawa, Takuma Yasuda*</p>
+                <p class="pub-journal"><em>J. Mater. Chem. C</em> <strong>2018</strong>, <em>6</em>, 3578–3583.</p>
+            </div>
+        </div>
+
+        <div class="publication fade-in">
+            <div class="pub-number">16</div>
+            <div class="pub-content">
+                <h3 class="pub-title"><a href="https://doi.org/10.1021/acs.chemmater.7b03371">Isobenzofuranone- and Chromone-Based Blue Delayed Fluorescence Emitters with Low Efficiency Roll-Off in Organic Light-Emitting Diodes</a></h3>
+                <p class="pub-authors">Jiyoung Lee, Naoya Aizawa, Takuma Yasuda*</p>
+                <p class="pub-journal"><em>Chem. Mater.</em> <strong>2017</strong>, <em>29</em>, 8012–8020.</p>
+            </div>
+        </div>
+
+        <div class="publication fade-in">
+            <div class="pub-number">15</div>
+            <div class="pub-content">
+                <h3 class="pub-title"><a href="https://doi.org/10.1021/acs.chemmater.7b02606">Spin-Dependent Exciton Funneling to a Dendritic Fluorophore Mediated by a Thermally Activated Delayed Fluorescence Material as an Exciton-Harvesting Host</a></h3>
+                <p class="pub-authors">Naoya Aizawa,* So Shikita, Takuma Yasuda*</p>
+                <p class="pub-journal"><em>Chem. Mater.</em> <strong>2017</strong>, <em>29</em>, 7014–7022.</p>
+            </div>
+        </div>
+
+        <div class="publication fade-in">
+            <div class="pub-number">14</div>
+            <div class="pub-content">
+                <h3 class="pub-title"><a href="https://doi.org/10.1038/nmat4818">Solution-based electrical doping of semiconducting polymer films over a limited depth</a></h3>
+                <p class="pub-authors">Vladimir A. Kolesov, Canek Fuentes-Hernandez, Wen-Fang Chou, Naoya Aizawa, Felipe A. Larrain, Ming Wang, Alberto Perrotta, Sangmoo Choi, Samuel Graham, Guillermo C. Bazan, Thuc-Quyen Nguyen, Seth R. Marder, Bernard Kippelen*</p>
+                <p class="pub-journal"><em>Nat. Mater.</em> <strong>2017</strong>, <em>16</em>, 474–480.</p>
+            </div>
+        </div>
+
+        <div class="publication fade-in">
+            <div class="pub-number">13</div>
+            <div class="pub-content">
+                <h3 class="pub-title"><a href="https://doi.org/10.1021/acsphotonics.6b00964">Tunable Full-Color Electroluminescence from All-Organic Optical Upconversion Devices by Near-Infrared Sensing</a></h3>
+                <p class="pub-authors">Hiroki Tachibana, Naoya Aizawa, Yu Hidaka, Takuma Yasuda*</p>
+                <p class="pub-journal"><em>ACS Photonics</em> <strong>2017</strong>, <em>4</em>, 223–227.</p>
+            </div>
+        </div>
+
+        <div class="publication fade-in">
+            <div class="pub-number">12</div>
+            <div class="pub-content">
+                <h3 class="pub-title"><a href="https://doi.org/10.1002/adma.201604856">Versatile Molecular Functionalization for Inhibiting Concentration Quenching of Thermally Activated Delayed Fluorescence</a></h3>
+                <p class="pub-authors">Jiyoung Lee, Naoya Aizawa, Masaki Numata, Chihaya Adachi, Takuma Yasuda*</p>
+                <p class="pub-journal"><em>Adv. Mater.</em> <strong>2016</strong>, <em>29</em>, 1604856.</p>
+            </div>
+        </div>
+
+        <div class="publication fade-in">
+            <div class="pub-number">11</div>
+            <div class="pub-content">
+                <h3 class="pub-title"><a href="https://doi.org/10.1038/pj.2016.82">Aggregation-induced delayed fluorescence from phenothiazine-containing donor–acceptor molecules for high-efficiency non-doped organic light-emitting diodes</a></h3>
+                <p class="pub-authors">Naoya Aizawa, Chao-Jen Tsou, In Seob Park, Takuma Yasuda*</p>
+                <p class="pub-journal"><em>Polymer J.</em> <strong>2016</strong>, <em>49</em>, 197–202.</p>
+            </div>
+        </div>
+
+        <div class="publication fade-in">
+            <div class="pub-number">10</div>
+            <div class="pub-content">
+                <h3 class="pub-title"><a href="https://eds.p.ebscohost.com/abstract?site=eds&scope=site&jrnl=02182203&AN=114615579&h=%2fMvMnRFs6hoDJt2B5ItqUPAtkJSdSH7o9kIoC7hyjft0FZOqLQkk%2bIT0XNwIklSNQM%2fr%2fgHASZqgP4a64vriyA%3d%3d&crl=c&resultLocal=ErrCrlNoResults&resultNs=Ehost&crlhashurl=login.aspx%3fdirect%3dtrue%26profile%3dehost%26scope%3dsite%26authtype%3dcrawler%26jrnl%3d02182203%26AN%3d114615579">Design of Thermally Activated Delayed Fluorescence Materials for Organic Light-Emitting Diodes</a></h3>
+                <p class="pub-authors">Naoya Aizawa, In Seob Park, Takuma Yasuda*</p>
+                <p class="pub-journal"><em>AAPPS Bull.</em> <strong>2016</strong>, <em>26</em>, 9–19.</p>
+            </div>
+        </div>
+
+        <div class="publication fade-in">
+            <div class="pub-number">9</div>
+            <div class="pub-content">
+                <h3 class="pub-title"><a href="https://doi.org/10.1039/C6CC01022A">Simultaneous cross-linking and p-doping of a polymeric semiconductor film by immersion into a phosphomolybdic acid solution for use in organic solar cells</a></h3>
+                <p class="pub-authors">Naoya Aizawa,* Canek Fuentes-Hernandez, Vladimir A. Kolesov, Talha M. Khan, Junji Kido, Bernard Kippelen</p>
+                <p class="pub-journal"><em>Chem. Commun.</em> <strong>2016</strong>, <em>52</em>, 3825–3827.</p>
+            </div>
+        </div>
+
+        <div class="publication fade-in">
+            <div class="pub-number">8</div>
+            <div class="pub-content">
+                <h3 class="pub-title"><a href="https://doi.org/10.1002/adma.201403973">Fabrication of Organic Light-Emitting Devices Comprising Stacked Light-Emitting Units by Solution-Based Processes</a></h3>
+                <p class="pub-authors">Yong-Jin Pu,* Takayuki Chiba, Kazushige Ideta, Shogo Takahashi, Naoya Aizawa, Tatsuya Hikichi, Junji Kido*</p>
+                <p class="pub-journal"><em>Adv. Mater.</em> <strong>2014</strong>, <em>27</em>, 1327–1332.</p>
+            </div>
+        </div>
+
+        <div class="publication fade-in">
+            <div class="pub-number">7</div>
+            <div class="pub-content">
+                <h3 class="pub-title"><a href="https://doi.org/10.1038/ncomms6756">Solution-processed multilayer small-molecule light-emitting devices with high-efficiency white-light emission</a></h3>
+                <p class="pub-authors">Naoya Aizawa, Yong-Jin Pu,* Michitake Watanabe, Takayuki Chiba, Kazushige Ideta, Naoki Toyota, Masahiro Igarashi, Yoshiyuki Suzuri, Hisahiro Sasabe, Junji Kido*</p>
+                <p class="pub-journal"><em>Nat. Commun.</em> <strong>2014</strong>, <em>5</em>, 5756.</p>
+            </div>
+        </div>
+
+        <div class="publication fade-in">
+            <div class="pub-number">6</div>
+            <div class="pub-content">
+                <h3 class="pub-title"><a href="https://doi.org/10.1002/adma.201402726">Instant Low-Temperature Cross-Linking of Poly(N-vinylcarbazole) for Solution-Processed Multilayer Blue Phosphorescent Organic Light-Emitting Devices</a></h3>
+                <p class="pub-authors">Naoya Aizawa, Yong-Jin Pu,* Takayuki Chiba, So Kawata, Hisahiro Sasabe, Junji Kido*</p>
+                <p class="pub-journal"><em>Adv. Mater.</em> <strong>2014</strong>, <em>26</em>, 7543–7546.</p>
+            </div>
+        </div>
+
+        <div class="publication fade-in">
+            <div class="pub-number">5</div>
+            <div class="pub-content">
+                <h3 class="pub-title"><a href="https://doi.org/10.1002/cplu.201300428">2,6-Bis(arylsulfonyl)anilines as Fluorescent Scaffolds through Intramolecular Hydrogen Bonds: Solid-State Fluorescence Materials and Turn-On-Type Probes Based on Aggregation-Induced Emission</a></h3>
+                <p class="pub-authors">Teruo Beppu, So Kawata, Naoya Aizawa, Yong-Jin Pu, Yasuyuki Abe,* Yoshihiro Ohba, Hiroshi Katagiri*</p>
+                <p class="pub-journal"><em>ChemPlusChem</em> <strong>2014</strong>, <em>79</em>, 536–545.</p>
+            </div>
+        </div>
+
+        <div class="publication fade-in">
+            <div class="pub-number">4</div>
+            <div class="pub-content">
+                <h3 class="pub-title"><a href="https://doi.org/10.1016/j.orgel.2013.03.028">Thermally cross-linkable host materials for enabling solution-processed multilayer stacks in organic light-emitting devices</a></h3>
+                <p class="pub-authors">Naoya Aizawa, Yong-Jin Pu,* Hisahiro Sasabe, Junji Kido*</p>
+                <p class="pub-journal"><em>Org. Electron.</em> <strong>2013</strong>, <em>14</em>, 1614–1620.</p>
+            </div>
+        </div>
+
+        <div class="publication fade-in">
+            <div class="pub-number">3</div>
+            <div class="pub-content">
+                <h3 class="pub-title"><a href="https://doi.org/10.2494/photopolymer.26.403">Multilayered Organic Light-Emitting Devices by Solution-Process</a></h3>
+                <p class="pub-authors">Yong-Jin Pu,* Takayuki Chiba, Naoya Aizawa, Hisahiro Sasabe, Junji Kido*</p>
+                <p class="pub-journal"><em>J. Photopolymer Sci. Tec.</em> <strong>2013</strong>, <em>26</em>, 403–410.</p>
+            </div>
+        </div>
+
+        <div class="publication fade-in">
+            <div class="pub-number">2</div>
+            <div class="pub-content">
+                <h3 class="pub-title"><a href="https://doi.org/10.1016/j.orgel.2012.06.036">Solution-processable carbazole-based host materials for phosphorescent organic light-emitting devices</a></h3>
+                <p class="pub-authors">Naoya Aizawa, Yong-Jin Pu,* Hisahiro Sasabe, Junji Kido*</p>
+                <p class="pub-journal"><em>Org. Electron.</em> <strong>2012</strong>, <em>13</em>, 2235–2242.</p>
+            </div>
+        </div>
+
+        <div class="publication fade-in">
+            <div class="pub-number">1</div>
+            <div class="pub-content">
+                <h3 class="pub-title"><a href="https://doi.org/10.1016/j.orgel.2011.08.015">fac-Tris(2-phenylpyridine)iridium(III)s, covalently surrounded by six bulky host dendrons, for a highly efficient solution-processed organic light emitting device</a></h3>
+                <p class="pub-authors">Yong-Jin Pu,* Noriaki Iguchi, Naoya Aizawa, Hisahiro Sasabe, Ken-ichi Nakayama, Junji Kido*</p>
+                <p class="pub-journal"><em>Org. Electron.</em> <strong>2011</strong>, <em>12</em>, 2103–2110.</p>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-container">
+            <div class="footer-section">
+                <h4>Research</h4>
+                <ul class="footer-links">
+                    <li><a href="research.html">Research Areas</a></li>
+                    <li><a href="publications.html">Publications</a></li>
+                    <li><a href="facilities.html">Facilities</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-section">
+                <h4>People</h4>
+                <ul class="footer-links">
+                    <li><a href="members.html">Members</a></li>
+                    <li><a href="join.html">Join Our Lab </a></li>
+                </ul>
+            </div>
+
+            <div class="footer-section">
+                <h4>Contact</h4>
+                <ul class="footer-links">
+                    <li><a href="/cdn-cgi/l/email-protection#137d3e727a69726472537a70617677773d7b7c786677727a3d72703d7963">Email: n-aizawa @ icredd.hokudai.ac.jp </a></li>
+                    <li><a>Phone: +81(0)-6-6879-4585</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-section">
+                <h4>Location</h4>
+                <ul class="footer-links">
+                    <li><a href="https://maps.app.goo.gl/L5B2dskNCxqtGrfs7">Kita Campus, Building 8, Room 02-103
+                        Kita 21, Nishi 10, Kita-ku
+                        Sapporo 001-0021
+                        Japan</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            © 2026 Aizawa Research Group, ICReDD, Hokkaido University
+        </div>
+    </footer>
+
+    <script>
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.animationPlayState = 'running';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+    </script>
+</body>
+</html>

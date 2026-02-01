@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Research | Aizawa Research Group</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Tiempos+Text:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --color-bg: #F7F6F3;
+            --color-text: #191918;
+            --color-accent: #CC785C;
+            --color-border: rgba(25, 25, 24, 0.1);
+            --color-card-bg: #FFFFFF;
+            --font-serif: 'Tiempos Text', Georgia, serif;
+            --font-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-sans);
+            background-color: var(--color-bg);
+            color: var(--color-text);
+            line-height: 1.6;
+        }
+
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(247, 246, 243, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            border-bottom: 1px solid var(--color-border);
+        }
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: var(--font-serif);
+            font-size: 20px;
+            font-weight: 600;
+            color: var(--color-text);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .logo-img {
+            height: 32px;
+            width: auto;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 32px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--color-text);
+            text-decoration: none;
+            font-size: 15px;
+            transition: color 0.2s;
+        }
+
+        .nav-links a:hover {
+            color: var(--color-accent);
+        }
+
+        .hero-banner {
+            margin-top: 72px;
+            height: 400px;
+            background: linear-gradient(135deg, #191918 0%, #2D2D2C 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-banner img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 1;
+        }
+        
+
+        .hero-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.30);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .hero-text {
+            color: white;
+            text-align: center;
+            z-index: 10;
+        }
+        
+        @keyframes heroFadeIn {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hero-text h1 {
+            font-family: var(--font-serif);
+            font-size: clamp(42px, 6vw, 64px);
+            margin-bottom: 16px;
+            font-weight: 400;
+        }
+
+        .hero-text p {
+            font-size: 20px;
+            opacity: 0.9;
+        }
+
+        .content-section {
+            padding: 80px 40px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .intro-text {
+            max-width: 800px;
+            margin-bottom: 80px;
+        }
+
+        .intro-text p {
+            font-size: 18px;
+            line-height: 1.8;
+            color: rgba(25, 25, 24, 0.8);
+            margin-bottom: 20px;
+        }
+
+        .research-areas {
+            display: grid;
+            gap: 60px;
+        }
+
+        .research-card {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            background: var(--color-card-bg);
+            border-radius: 16px;
+            overflow: hidden;
+            border: 1px solid var(--color-border);
+            transition: transform 0.4s ease, box-shadow 0.4s ease;
+        }
+
+        .research-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.12);
+        }
+        
+        .research-card img {
+            transition: transform 0.6s ease;
+        }
+        
+        .research-card:hover img {
+            transform: scale(1.05);
+        }
+
+        .research-card:nth-child(even) {
+            direction: rtl;
+        }
+
+        .research-card:nth-child(even) > * {
+            direction: ltr;
+        }
+
+        .research-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            min-height: 400px;
+        }
+
+        .research-content {
+            padding: 40px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .research-label {
+            font-size: 13px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: var(--color-accent);
+            margin-bottom: 16px;
+        }
+
+        .research-content h2 {
+            font-family: var(--font-serif);
+            font-size: 32px;
+            margin-bottom: 20px;
+            font-weight: 400;
+        }
+
+        .research-content p {
+            font-size: 16px;
+            color: rgba(25, 25, 24, 0.7);
+            line-height: 1.8;
+            margin-bottom: 16px;
+        }
+
+        .research-highlights {
+            margin-top: 24px;
+        }
+
+        .research-highlights h4 {
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 12px;
+            color: rgba(25, 25, 24, 0.6);
+        }
+
+        .research-highlights ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .research-highlights li {
+            padding-left: 20px;
+            position: relative;
+            margin-bottom: 8px;
+            font-size: 15px;
+            color: rgba(25, 25, 24, 0.7);
+        }
+
+        .research-highlights li:before {
+            content: "→";
+            position: absolute;
+            left: 0;
+            color: var(--color-accent);
+        }
+
+        footer {
+            background: var(--color-text);
+            color: rgba(255, 255, 255, 0.8);
+            padding: 80px 40px 40px;
+        }
+
+        .footer-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 48px;
+            margin-bottom: 48px;
+        }
+
+        .footer-section h4 {
+            font-family: var(--font-serif);
+            color: white;
+            margin-bottom: 16px;
+            font-size: 18px;
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 12px;
+        }
+
+        .footer-links a {
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            font-size: 15px;
+            transition: color 0.2s;
+        }
+
+        .footer-links a:hover {
+            color: white;
+        }
+
+        .footer-bottom {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding-top: 32px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            text-align: center;
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 0.8s ease-out forwards;
+        }
+
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .stagger-1 { animation-delay: 0.1s; }
+        .stagger-2 { animation-delay: 0.2s; }
+        .stagger-3 { animation-delay: 0.3s; }
+
+        @media (max-width: 968px) {
+            .research-card {
+                grid-template-columns: 1fr;
+            }
+
+            .research-card:nth-child(even) {
+                direction: ltr;
+            }
+        }
+        /* Make links look like normal text by default */
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+        a:hover {
+            color: inherit;
+        }
+
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="nav-container">
+            <a href="https://www.n-aizawa.com" class="logo">
+                <img src="images/logo.png" alt="Aizawa Research Group Logo" class="logo-img">
+                <span>Aizawa Research Group</span>
+            </a>
+            <ul class="nav-links">
+                <li><a href="https://www.n-aizawa.com">Home</a></li>
+                <li><a href="members.html">Members</a></li>
+                <li><a href="research.html">Research</a></li>
+                <li><a href="publications.html">Publications</a></li>
+                <li><a href="facilities.html">Facilities</a></li>
+                <li><a href="join.html">Join</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="hero-banner">
+        <img src="images/research-hero3.png" alt="Research">
+        <div class="hero-overlay">
+            <div class="hero-text">
+                <h1>Research Topics</h1>
+            </div>
+        </div>
+        
+    </div>
+    <div class="content-section">
+        <div class="intro-text fade-in">
+        </div>
+
+        <div class="research-areas">
+            <div class="research-card fade-in stagger-1">
+                <img src="images/research-IST.jpg" alt="IST Systems" class="research-image">
+                <div class="research-content">
+                    <div class="research-label">Materials Development</div>
+                    <h2>Inverted Singlet-Triplet Materials</h2>
+                    <p>
+                        We pioneer the design and synthesis of molecules with inverted singlet and triplet excited states (IST), where the lowest triplet state lies energetically above the lowest singlet state, violating the famous Hund’s rule.
+                    </p>
+                    <p>
+                        This unusual electronic structure enables highly efficient organic light-emitting diodes (OLEDs) by facilitating rapid reverse intersystem crossing and eliminating triplet-related efficiency losses.
+                    </p>
+                    <div class="research-highlights">
+                        <h4>Key Publications</h4>
+                        <ul>
+                            <li> <a href="https://doi.org/10.1038/s41586-022-05132-y" target="_blank">N. Aizawa et al. <em>Nature</em>  <strong>2022</strong>, <em>609</em>, 502.</a></li>
+                            <li><a href="https://doi.org/10.1063/5.0152834" target="_blank">T. Won et al. <em>Chem. Phys. Rev.</em> <strong>2023</strong>, <em>4</em>, 021310.</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="research-card fade-in stagger-2">
+                <img src="images/research-prediction.jpg" alt="Computational Design" class="research-image">
+                <div class="research-content">
+                    <div class="research-label">Computational Approach</div>
+                    <h2>Prediction of Spin-Flip Rates</h2>
+                    <p>
+                    We develop  geometry optimization and exploration methods on excited-state potential energy surfaces to predict intersystem crossing and reverse intersystem crossing rates in organic molecules.
+                    </p>
+                    <p>
+                    By combining quantum chemical calculations with machine-learning approaches, we accelerate the discovery of molecules with targeted photophysical properties, reducing trial-and-error in experimental synthesis.
+                    </p>
+                    <div class="research-highlights">
+                        <h4>Capabilities</h4>
+                        <ul>
+                            <li> <a href="https://doi.org/10.1038/s41467-020-17777-2" target="_blank">N. Aizawa et al. <em>Nat. Commun.</em>  <strong>2020</strong>, <em>11</em>, 3909.</a></li>
+                            <li> <a href="https://doi.org/10.1126/sciadv.abe5769" target="_blank">N. Aizawa et al. <em>Sci. Adv.</em>  <strong>2021</strong>, <em>7</em>, 5769.</a></li>
+                            <li> <a href="https://doi.org/10.1039/D5SC01903F" target="_blank">T. Won et al. <em>Cem. Sci.</em>  <strong>2025</strong>, <em>16</em>, 9303.</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!--
+            <div class="research-card fade-in stagger-3">
+                <img src="hero-main.png" alt="Device Applications" class="research-image">
+                <div class="research-content">
+                    <div class="research-label">Applications</div>
+                    <h2>Organic Optoelectronic Devices</h2>
+                    <p>
+                        We fabricate and characterize advanced organic electronic devices including OLEDs, organic solar cells, and sensors to demonstrate the practical utility of our molecular designs.
+                    </p>
+                    <p>
+                        Our work focuses on achieving record-breaking device performance through careful control of charge transport, exciton dynamics, and interface engineering.
+                    </p>
+                    <div class="research-highlights">
+                        <h4>Device Metrics</h4>
+                        <ul>
+                            <li>Record efficiency white OLEDs</li>
+                            <li>Ultra-stable device operation</li>
+                            <li>Low-voltage operation</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+-->
+        <div>
+            
+    </div>
+        <footer>
+            <div class="footer-container">
+                <div class="footer-section">
+                    <h4>Research</h4>
+                    <ul class="footer-links">
+                        <li><a href="research.html">Research Areas</a></li>
+                        <li><a href="publications.html">Publications</a></li>
+                        <li><a href="facilities.html">Facilities</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-section">
+                    <h4>People</h4>
+                    <ul class="footer-links">
+                        <li><a href="members.html">Members</a></li>
+                        <li><a href="join.html">Join Our Lab </a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-section">
+                    <h4>Contact</h4>
+                    <ul class="footer-links">
+                        <li><a href="/cdn-cgi/l/email-protection#137d3e727a69726472537a70617677773d7b7c786677727a3d72703d7963">Email: n-aizawa @ icredd.hokudai.ac.jp </a></li>
+                        <li><a>Phone: +81(0)-6-6879-4585</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-section">
+                    <h4>Location</h4>
+                    <ul class="footer-links">
+                        <li><a href="https://maps.app.goo.gl/L5B2dskNCxqtGrfs7">Kita Campus, Building 8, Room 02-103
+                            Kita 21, Nishi 10, Kita-ku
+                            Sapporo 001-0021
+                            Japan</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                © 2026 Aizawa Research Group, ICReDD, Hokkaido University
+            </div>
+        </footer>
+
+    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+        // Smooth parallax effect for hero image
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            const hero = document.querySelector('.hero-banner img');
+            const heroOverlay = document.querySelector('.hero-overlay');
+            
+            if (hero && scrolled < 800) {
+                hero.style.transform = `scale(1.1) translateY(${scrolled * 0.5}px)`;
+                heroOverlay.style.opacity = 1 + (scrolled * 0.001);
+            }
+        });
+        
+        // Intersection Observer for fade-in animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.animationPlayState = 'running';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelector

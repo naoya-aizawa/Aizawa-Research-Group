@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Join | Aizawa Research Group</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Tiempos+Text:wght@400;600&display=swap" rel="stylesheet" />
+
+  <style>
+    :root {
+      --color-bg: #F7F6F3;
+      --color-text: #191918;
+      --color-accent: #CC785C;
+      --color-border: rgba(25, 25, 24, 0.1);
+      --color-card-bg: #FFFFFF;
+      --font-serif: 'Tiempos Text', Georgia, serif;
+      --font-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: var(--font-sans);
+      background-color: var(--color-bg);
+      color: var(--color-text);
+      line-height: 1.6;
+    }
+
+    /* Navigation */
+    nav {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      background: rgba(247, 246, 243, 0.95);
+      backdrop-filter: blur(10px);
+      z-index: 1000;
+      border-bottom: 1px solid var(--color-border);
+    }
+
+    .nav-container {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 20px 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      font-family: var(--font-serif);
+      font-size: 20px;
+      font-weight: 600;
+      color: var(--color-text);
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .logo-img {
+      height: 32px;
+      width: auto;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 32px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: var(--color-text);
+      text-decoration: none;
+      font-size: 15px;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover {
+      color: var(--color-accent);
+    }
+
+    /* Hero Banner */
+    .hero-banner {
+      margin-top: 72px;
+      height: 400px;
+      background: linear-gradient(135deg, #191918 0%, #2D2D2C 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-banner img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0.6;
+      transform: scale(1.1);
+      will-change: transform;
+    }
+
+    .hero-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.30);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .hero-text {
+      color: white;
+      text-align: center;
+      z-index: 10;
+      padding: 0 16px;
+    }
+
+    .hero-text h1 {
+      font-family: var(--font-serif);
+      font-size: clamp(42px, 6vw, 64px);
+      margin-bottom: 16px;
+      font-weight: 400;
+    }
+
+    .hero-text p {
+      font-size: 20px;
+      opacity: 0.9;
+    }
+
+    /* Content Section */
+    .content-section {
+      padding: 80px 40px;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    /* Section */
+    .section {
+      margin-bottom: 80px;
+    }
+
+    .section-title {
+      font-family: var(--font-serif);
+      font-size: 36px;
+      font-weight: 400;
+      margin-bottom: 40px;
+      color: var(--color-text);
+    }
+
+    /* Position Cards */
+    .position-card {
+      background: var(--color-card-bg);
+      padding: 48px;
+      border-radius: 16px;
+      border: 1px solid var(--color-border);
+      transition: transform 0.4s ease, box-shadow 0.4s ease;
+    }
+
+    .position-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.12);
+    }
+
+    .position-card h3 {
+      font-family: var(--font-serif);
+      font-size: 28px;
+      font-weight: 400;
+      margin-bottom: 24px;
+      color: var(--color-text);
+    }
+
+    .position-card p {
+      font-size: 16px;
+      line-height: 1.8;
+      color: rgba(25, 25, 24, 0.7);
+      margin-bottom: 20px;
+    }
+
+    .position-card h4 {
+      font-size: 17px;
+      font-weight: 600;
+      margin-top: 32px;
+      margin-bottom: 16px;
+      color: var(--color-text);
+    }
+
+    .position-card ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .position-card li {
+      font-size: 15px;
+      line-height: 1.8;
+      color: rgba(25, 25, 24, 0.7);
+      padding-left: 24px;
+      position: relative;
+      margin-bottom: 12px;
+    }
+
+    .position-card li::before {
+      content: "→";
+      position: absolute;
+      left: 0;
+      color: var(--color-accent);
+    }
+
+    /* ✅ リンクの見た目（元デザイン維持） */
+    .position-card a {
+      color: var(--color-accent);
+      text-decoration: none;
+      border-bottom: 1px solid transparent;
+      transition: border-color 0.2s;
+    }
+
+    .position-card a:hover {
+      border-bottom-color: var(--color-accent);
+    }
+
+    /* CTA Section */
+    .cta-section {
+      text-align: center;
+      padding: 80px 40px;
+      background: var(--color-card-bg);
+      border-radius: 16px;
+      border: 1px solid var(--color-border);
+      margin-top: 60px;
+    }
+
+    .cta-section h2 {
+      font-family: var(--font-serif);
+      font-size: 36px;
+      font-weight: 400;
+      margin-bottom: 24px;
+    }
+
+    .cta-section > p {
+      font-size: 18px;
+      color: rgba(25, 25, 24, 0.7);
+      max-width: 700px;
+      margin: 0 auto 32px;
+      line-height: 1.8;
+    }
+
+    /* ✅ CTAボタン（白文字維持） */
+    .cta-button {
+      display: inline-block;
+      background: var(--color-accent);
+      color: white;
+      padding: 16px 40px;
+      border-radius: 8px;
+      text-decoration: none;
+      font-size: 16px;
+      font-weight: 500;
+      transition: all 0.3s ease;
+      margin-bottom: 24px;
+    }
+
+    .cta-button:hover {
+      background: #B36647;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 16px rgba(204, 120, 92, 0.3);
+    }
+
+    .cta-note {
+      font-size: 14px;
+      color: rgba(25, 25, 24, 0.6);
+      font-style: italic;
+      max-width: 600px;
+      margin: 0 auto;
+      line-height: 1.7;
+    }
+
+    /* Footer */
+    footer {
+      background: #191918;
+      color: white;
+      padding: 60px 40px 40px;
+    }
+
+    .footer-container {
+      max-width: 1400px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 48px;
+      margin-bottom: 40px;
+    }
+
+    .footer-section h4 {
+      font-size: 16px;
+      font-weight: 600;
+      margin-bottom: 20px;
+    }
+
+    .footer-links {
+      list-style: none;
+    }
+
+    .footer-links li {
+      margin-bottom: 12px;
+    }
+
+    .footer-links a {
+      color: rgba(255, 255, 255, 0.7);
+      text-decoration: none;
+      font-size: 15px;
+      transition: color 0.2s;
+    }
+
+    .footer-links a:hover {
+      color: white;
+    }
+
+    .footer-bottom {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding-top: 32px;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      text-align: center;
+      font-size: 14px;
+      color: rgba(255, 255, 255, 0.5);
+    }
+
+    /* Animations */
+    .fade-in {
+      opacity: 0;
+      transform: translateY(30px);
+      animation: fadeInUp 0.8s ease-out forwards;
+      animation-play-state: paused;
+    }
+
+    @keyframes fadeInUp {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .stagger-1 { animation-delay: 0.1s; }
+    .stagger-2 { animation-delay: 0.2s; }
+    .stagger-3 { animation-delay: 0.3s; }
+    .stagger-4 { animation-delay: 0.4s; }
+
+    /* Responsive */
+    @media (max-width: 968px) {
+      .nav-container {
+        padding: 16px 24px;
+      }
+
+      .nav-links {
+        gap: 20px;
+      }
+
+      .nav-links a {
+        font-size: 14px;
+      }
+
+      .hero-banner {
+        height: 300px;
+      }
+
+      .content-section {
+        padding: 60px 24px;
+      }
+
+      .section {
+        margin-bottom: 60px;
+      }
+
+      .position-card {
+        padding: 32px 24px;
+      }
+
+      .cta-section {
+        padding: 60px 24px;
+      }
+    }
+      
+      /* CTAボタンはリンク共通スタイルより優先して白文字にする */
+      .position-card a.cta-button {
+        color: #fff;
+        border-bottom: none; /* hover下線の影響も消す */
+      }
+  </style>
+</head>
+
+<body>
+  <nav>
+    <div class="nav-container">
+      <a href="https://www.n-aizawa.com" class="logo">
+        <img src="images/logo.png" alt="Aizawa Research Group Logo" class="logo-img" />
+        <span>Aizawa Research Group</span>
+      </a>
+      <ul class="nav-links">
+        <li><a href="https://www.n-aizawa.com">Home</a></li>
+        <li><a href="members.html">Members</a></li>
+        <li><a href="research.html">Research</a></li>
+        <li><a href="publications.html">Publications</a></li>
+        <li><a href="facilities.html">Facilities</a></li>
+        <li><a href="join.html">Join</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <div class="hero-banner">
+    <img src="images/join-hero.jpg" alt="Join Our Lab" />
+    <div class="hero-overlay">
+      <div class="hero-text">
+        <h1>Join Our Lab</h1>
+      </div>
+    </div>
+  </div>
+
+  <div class="content-section">
+    <section class="section fade-in stagger-2">
+      <div class="position-card">
+        <h3>学生の皆様へ</h3>
+        <p>
+          北海道大学ICReDD 相澤研究室では、修士課程・博士課程の大学院生を募集しています。
+          北海道大学はもちろん他大学や高専からの参加も大歓迎です。研究室見学やフェローシップ(JST 創発RAやSPRING)の相談等も随時可能です。
+        </p>
+
+        <p style="margin-top: 24px;">
+          入試情報は<a href="https://www.cse.hokudai.ac.jp/admission/" target="_blank" rel="noopener">北海道大学大学院総合化学院のWEBサイト</a>をご覧ください。
+        </p>
+
+        <h3 style="margin-top: 60px;">博士研究員の皆様へ</h3>
+        <p>
+          博士研究員の募集を随時行っています。JSPS特別研究員やJST BOOST等の受入れも可能です。
+          ご自身の経験や興味に応じて、上記の研究課題に関する研究活動が可能です。
+          <ul>
+            <li>新規有機発光材料の合成と光物性評価</li>
+            <li>有機ELデバイスの作製と評価</li>
+            <li>量子化学計算や機械学習を用いた材料設計</li>
+            <li>自動化学合成ロボットを用いた材料探索</li>
+          </ul>
+        </p>
+
+        <p>
+          詳細は<a href="https://www.icredd.hokudai.ac.jp/ja/opportunity/14659" target="_blank" rel="noopener">ICReDD公募WEBサイト</a>をご覧ください。
+        </p>
+
+        <p>ご興味のある方は、お気軽にお問い合わせください。研究室見学も随時可能です。</p>
+
+        <a href="mailto:n-aizawa@icredd.hokudai.ac.jp" class="cta-button">メールでお問い合わせ</a>
+      </div>
+    </section>
+
+    <section class="section fade-in stagger-2">
+      <div class="position-card">
+        <h3>Career Opportunities </h3>
+
+        <p>
+          We are always looking for highly motivated students to join our group.
+          Students interested in pursuing an M.Sc. or a Ph.D. should apply to <a href="https://www.cse.hokudai.ac.jp/en/admission/" target="_blank" rel="noopener">
+              the Graduate School of Chemical Sciences and Engineering, Hokkaido University.         </a>
+          Students are welcome to discuss their eligibility for scholarship support from JST or JSPS.
+        </p>
+
+
+
+        <p>
+          We also invite applications for <a href="https://www.icredd.hokudai.ac.jp/opportunity/14659" target="_blank" rel="noopener">Postdoctoral Fellow Positions in our group.</a> Depending on the applicant’s experience and research interests,
+          one or more of the research topics listed below may be selected.
+        </p>
+
+        <ul>
+          <li>Synthesis and photophysical characterization of novel organic materials</li>
+          <li>Fabrication of organic light-emitting diodes (OLEDs)</li>
+          <li>Materials design using quantum chemical calculations and machine learning</li>
+          <li>Materials exploration using automated chemical synthesis robots</li>
+        </ul>
+
+        <a style="margin-top: 16px;"href="mailto:n-aizawa@icredd.hokudai.ac.jp" class="cta-button">Contact by Email</a>
+
+        <p>
+        We carefully review all applications. However, due to the high volume we receive, only applicants whose backgrounds best match our research needs will be contacted. Thank you for your understanding.
+        </p>
+      </div>
+    </section>
+  </div>
+
+  <footer>
+      <div class="footer-container">
+          <div class="footer-section">
+              <h4>Research</h4>
+              <ul class="footer-links">
+                  <li><a href="research.html">Research Areas</a></li>
+                  <li><a href="publications.html">Publications</a></li>
+                  <li><a href="facilities.html">Facilities</a></li>
+              </ul>
+          </div>
+
+          <div class="footer-section">
+              <h4>People</h4>
+              <ul class="footer-links">
+                  <li><a href="members.html">Members</a></li>
+                  <li><a href="join.html">Join Our Lab </a></li>
+              </ul>
+          </div>
+
+          <div class="footer-section">
+              <h4>Contact</h4>
+              <ul class="footer-links">
+                  <li><a href="/cdn-cgi/l/email-protection#137d3e727a69726472537a70617677773d7b7c786677727a3d72703d7963">Email: n-aizawa @ icredd.hokudai.ac.jp </a></li>
+                  <li><a>Phone: +81(0)-6-6879-4585</a></li>
+              </ul>
+          </div>
+
+          <div class="footer-section">
+              <h4>Location</h4>
+              <ul class="footer-links">
+                  <li><a href="https://maps.app.goo.gl/L5B2dskNCxqtGrfs7">Kita Campus, Building 8, Room 02-103
+                      Kita 21, Nishi 10, Kita-ku
+                      Sapporo 001-0021
+                      Japan</a></li>
+              </ul>
+          </div>
+      </div>
+
+      <div class="footer-bottom">
+          © 2026 Aizawa Research Group, ICReDD, Hokkaido University
+      </div>
+  </footer>
+
+  <script>
+    // Smooth parallax effect for hero image
+    window.addEventListener('scroll', () => {
+      const scrolled = window.pageYOffset;
+      const hero = document.querySelector('.hero-banner img');
+      const heroOverlay = document.querySelector('.hero-overlay');
+
+      if (hero && scrolled < 800) {
+        hero.style.transform = `scale(1.1) translateY(${scrolled * 0.5}px)`;
+        if (heroOverlay) {
+          heroOverlay.style.opacity = 1 + (scrolled * 0.001);
+        }
+      }
+    });
+
+    // Intersection Observer for fade-in animations
+    const observerOptions = {
+      threshold: 0.1,
+      rootMargin: '0px 0px -50px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.style.animationPlayState = 'running';
+        }
+      });
+    }, observerOptions);
+
+    document.querySelectorAll('.fade-in').forEach(el => {
+      observer.observe(el);
+    });
+  </script>
+</body>
+</html>

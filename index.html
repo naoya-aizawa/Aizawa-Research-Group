@@ -1,0 +1,621 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aizawa Research Group | Hokkaido University</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Tiempos+Text:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --color-bg: #F7F6F3;
+            --color-text: #191918;
+            --color-accent: #CC785C;
+            --color-border: rgba(25, 25, 24, 0.1);
+            --color-card-bg: #FFFFFF;
+            --font-serif: 'Tiempos Text', Georgia, serif;
+            --font-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-sans);
+            background-color: var(--color-bg);
+            color: var(--color-text);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(247, 246, 243, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            border-bottom: 1px solid var(--color-border);
+        }
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: var(--font-serif);
+            font-size: 20px;
+            font-weight: 600;
+            color: var(--color-text);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .logo-img {
+            height: 32px;
+            width: auto;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 32px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--color-text);
+            text-decoration: none;
+            font-size: 15px;
+            transition: color 0.2s;
+        }
+
+        .nav-links a:hover {
+            color: var(--color-accent);
+        }
+
+        /* Hero Section - Improved */
+        .hero {
+            margin-top: 72px;
+            padding: 0;
+            max-width: 1400px;
+            margin-left: auto;
+            margin-right: auto;
+            position: relative;
+        }
+
+        /* Hero Visual Container */
+        .hero-visual {
+            position: relative;
+            width: 100%;
+            height: 700px;
+            overflow: hidden;
+            border-radius: 0;
+            background: linear-gradient(135deg, #191918 0%, #2D2D2C 100%);
+        }
+
+        .mars-container {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .mars-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0;
+            animation: fadeInMars 2s ease-out forwards;
+            animation-delay: 0.5s;
+        }
+
+        .mars-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: transparent;
+        }
+
+        /* Hero Content - Overlaying the image */
+        .hero-content {
+            position: absolute;
+            top: 50%;
+            left: 40px;
+            transform: translateY(-50%);
+            z-index: 10;
+            max-width: 900px;
+            width: calc(100% - 80px);
+            text-align: left;
+            opacity: 0;
+            animation: slideUpFade 1s ease-out forwards;
+            animation-delay: 1.2s;
+        }
+
+        .hero h1 {
+            font-family: var(--font-serif);
+            font-size: clamp(42px, 6vw, 72px);
+            line-height: 1.1;
+            margin-bottom: 32px;
+            font-weight: 400;
+            color: var(--color-text);
+        }
+
+        .hero-subtitle {
+            font-size: 25px;
+            color: rgba(25, 25, 24, 0.7);
+            margin-bottom: 32px;
+            max-width: 700px;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 16px 32px;
+            background-color: var(--color-accent);
+            color: #FFFFFF;
+            text-decoration: none;
+            border-radius: 8px;
+            font-size: 22px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 12px rgba(204, 120, 92, 0.2);
+        }
+
+        .cta-button:hover {
+            background-color: #B86A4E;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(204, 120, 92, 0.3);
+        }
+
+        @keyframes fadeInMars {
+            from {
+                opacity: 0;
+                transform: scale(1.1);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        @keyframes slideUpFade {
+            from {
+                opacity: 0;
+                transform: translateY(-40%);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(-50%);
+            }
+        }
+
+        /* Featured Card */
+        .featured-section {
+            padding: 80px 40px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .featured-card {
+            background: var(--color-card-bg);
+            border-radius: 16px;
+            overflow: hidden;
+            border: 1px solid var(--color-border);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .featured-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08);
+        }
+
+        .featured-image {
+            width: 100%;
+            height: 420px;
+            object-fit: contain;
+            background: linear-gradient(180deg, #f5f5f5, #f5f5f5);
+            padding: 24px;
+            box-sizing: border-box;
+            display: block;
+        }
+        
+
+        .featured-content {
+            padding: 40px;
+        }
+
+        .featured-label {
+            font-size: 13px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: var(--color-accent);
+            margin-bottom: 16px;
+        }
+
+        .featured-content h2 {
+            font-family: var(--font-serif);
+            font-size: 36px;
+            margin-bottom: 16px;
+            font-weight: 400;
+        }
+
+        .featured-content p {
+            font-size: 18px;
+            color: rgba(25, 25, 24, 0.7);
+            line-height: 1.7;
+        }
+
+        /* News Grid */
+        .news-section {
+            padding: 80px 40px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            font-family: var(--font-serif);
+            font-size: 42px;
+            margin-bottom: 48px;
+            font-weight: 400;
+        }
+
+        .news-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+            gap: 32px;
+        }
+
+        .news-card {
+            background: var(--color-card-bg);
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid var(--color-border);
+            transition: transform 0.3s, box-shadow 0.3s;
+            cursor: pointer;
+        }
+
+        .news-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.06);
+        }
+
+        .news-image {
+            width: 100%;
+            aspect-ratio: 1 / 1;
+            object-fit: cover;
+            display: block;
+            object-fit: cover;
+        }
+
+        .news-content {
+            padding: 24px;
+        }
+
+        .news-date {
+            font-size: 13px;
+            color: rgba(25, 25, 24, 0.5);
+            margin-bottom: 8px;
+        }
+
+        .news-content h3 {
+            font-size: 18px;
+            margin-bottom: 8px;
+            line-height: 1.4;
+        }
+
+        .news-content p {
+            font-size: 15px;
+            color: rgba(25, 25, 24, 0.7);
+            line-height: 1.6;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--color-text);
+            color: rgba(255, 255, 255, 0.8);
+            padding: 80px 40px 40px;
+        }
+
+        .footer-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 48px;
+            margin-bottom: 48px;
+        }
+
+        .footer-section h4 {
+            font-family: var(--font-serif);
+            color: white;
+            margin-bottom: 16px;
+            font-size: 18px;
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 12px;
+        }
+
+        .footer-links a {
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            font-size: 15px;
+            transition: color 0.2s;
+        }
+
+        .footer-links a:hover {
+            color: white;
+        }
+
+        .footer-bottom {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding-top: 32px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            text-align: center;
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-links {
+                gap: 16px;
+            }
+
+            .hero-visual {
+                height: 500px;
+            }
+
+            .hero-content {
+                left: 20px;
+                width: calc(100% - 40px);
+            }
+
+            .hero h1 {
+                font-size: 36px;
+            }
+
+            .hero-subtitle {
+                font-size: 16px;
+            }
+
+            .news-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Scroll animations */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 0.8s ease-out forwards;
+        }
+
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .stagger-1 { animation-delay: 0.1s; }
+        .stagger-2 { animation-delay: 0.2s; }
+        .stagger-3 { animation-delay: 0.3s; }
+        .stagger-4 { animation-delay: 0.4s; }
+        .stagger-5 { animation-delay: 0.5s; }
+        .stagger-6 { animation-delay: 0.6s; }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-container">
+            <a href="https://www.n-aizawa.com" class="logo">
+                <img src="images/logo.png" alt="Aizawa Research Group Logo" class="logo-img">
+                <span>Aizawa Research Group</span>
+            </a>
+            <ul class="nav-links">
+                <li><a href="https://www.n-aizawa.com">Home</a></li>
+                <li><a href="members.html">Members</a></li>
+                <li><a href="research.html">Research</a></li>
+                <li><a href="publications.html">Publications</a></li>
+                <li><a href="facilities.html">Facilities</a></li>
+                <li><a href="join.html">Join</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section - Improved -->
+    <section class="hero" id="home">
+        <div class="hero-visual">
+            <div class="mars-container">
+                <img src="images/hero-main.png" alt="Research visualization" class="mars-image">
+                <div class="mars-overlay"></div>
+            </div>
+            
+            <!-- Hero content now overlays the image -->
+            <div class="hero-content">
+                <h1>Getting to Grips with Exciton Spin Flips</h1>
+                <p class="hero-subtitle"> We explore new excitonic properties of organic semiconductors and tap them to form optoelectronic devices</p>
+                <a href="join.html" class="cta-button">Join Our Lab →</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Research -->
+    <a href="https://doi.org/10.1039/D5SC01903F" target="_blank" style="text-decoration:none; color:inherit;">
+   <section class="featured-section">
+        <div class="featured-card fade-in stagger-3">
+            <img src="images/news-research-BO.jpg" alt="BO" class="featured-image">
+            <div class="featured-content">
+                <div class="featured-label">Featured Research</div>
+                <h2>Bayesian Molecular Optimization for Rapid Reverse Intersystem Crossing</h2>
+                <p>Read More →</p>
+            </div>
+        </div>
+    </a>
+    </section>
+
+    <!-- News Section -->
+    <section class="news-section">
+        <h2 class="section-title fade-in">Recent News</h2>
+        <div class="news-grid">
+            
+            <a href="https://www.mrs.org/meetings-events/annual-meetings/archive/meeting/symposium-sessions/call-for-papers/2026-mrs-spring-meeting/Symposium-EL04-Recent-Advances-in---Conjugated-Materials-From-Fundamentals-to-Device-Applications" target="_blank" style="text-decoration:none; color:inherit;">
+            <div class="news-card fade-in stagger-1">
+                <img src="images/news-mrs-2026.png" alt="MRS 2026" class="news-image">
+                <div class="news-content">
+                    <div class="news-date">April 2026</div>
+                    <h3>MRS Spring Meeting 2026</h3>
+                    <p>Invited talk on inverted singlet-triplet materials and their applications in OLEDs.</p>
+                </div>
+            </div>
+            </a>
+            
+            <a href="https://www.icredd.hokudai.ac.jp/opportunity/14659/" target="_blank" style="text-decoration:none; color:inherit;">
+            <div class="news-card fade-in stagger-4">
+                <img src="images/news-wpi-position.png" alt="WPI Position" class="news-image">
+                <div class="news-content">
+                    <div class="news-date">March 2026</div>
+                    <h3>Career Opportunities</h3>
+                    <p>We're hiring Postdoctoral Fellows through the WPI Program at ICReDD!</p>
+                </div>
+            </div>
+            </a>
+
+            <a href="https://www.icredd.hokudai.ac.jp/" target="_blank" style="text-decoration:none; color:inherit;">
+            <div class="news-card fade-in stagger-2">
+                <img src="images/news-icredd-launch.jpg" alt="ICReDD" class="news-image">
+                <div class="news-content">
+                    <div class="news-date">March 2026</div>
+                    <h3>Aizawa Lab Launch </h3>
+                    <p>The Aizawa Lab is officially launching at ICReDD, Hokkaido University!</p>
+                </div>
+            </div>
+            </a>
+            
+            <div class="news-card fade-in stagger-3">
+                <img src="images/news-pacifichem.png" alt="Pacifichem" class="news-image">
+                <div class="news-content">
+                    <div class="news-date">December 2025</div>
+                    <h3>Pacifichem 2025</h3>
+                    <p>Our students Kurihara, Xu, and Fujimoto presented our latest findings on IST materials.</p>
+                </div>
+            </div>
+
+            <a href="https://www.jst.go.jp/kisoken/crest/en/research_area/area2025-1.html" target="_blank" style="text-decoration:none; color:inherit;">
+            <div class="news-card fade-in stagger-5">
+                <img src="images/news-jst-crest.jpg" alt="JST CREST" class="news-image">
+                <div class="news-content">
+                    <div class="news-date">October 2025</div>
+                    <h3>New research project launch</h3>
+                    <p>We have launched an exciting new research initiative through JST CREST, focusing on excited-state
+                    fluctuations.</p>
+                </div>
+            </div>
+            </a>
+            
+            <a href="https://www.n-aizawa.com/" target="_blank" style="text-decoration:none; color:inherit;">
+            <div class="news-card fade-in stagger-6">
+                <img src="images/news-website-launch.jpg" alt="Website Launch" class="news-image">
+                <div class="news-content">
+                    <div class="news-date">-</div>
+                    <h3>New Website Launch</h3>
+                    <p>Welcome to our research group website! Here you'll find our latest news and research activities. </p>
+                </div>
+            </div>
+            </a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-container">
+            <div class="footer-section">
+                <h4>Research</h4>
+                <ul class="footer-links">
+                    <li><a href="research.html">Research Areas</a></li>
+                    <li><a href="publications.html">Publications</a></li>
+                    <li><a href="facilities.html">Facilities</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-section">
+                <h4>People</h4>
+                <ul class="footer-links">
+                    <li><a href="members.html">Members</a></li>
+                    <li><a href="join.html">Join Our Lab </a></li>
+                </ul>
+            </div>
+
+            <div class="footer-section">
+                <h4>Contact</h4>
+                <ul class="footer-links">
+                    <li><a href="/cdn-cgi/l/email-protection#137d3e727a69726472537a70617677773d7b7c786677727a3d72703d7963">Email: n-aizawa @ icredd.hokudai.ac.jp </a></li>
+                    <li><a>Phone: +81(0)-6-6879-4585</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-section">
+                <h4>Location</h4>
+                <ul class="footer-links">
+                    <li><a href="https://maps.app.goo.gl/L5B2dskNCxqtGrfs7">Kita Campus, Building 8, Room 02-103
+                        Kita 21, Nishi 10, Kita-ku
+                        Sapporo 001-0021
+                        Japan</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            © 2026 Aizawa Research Group, ICReDD, Hokkaido University
+        </div>
+    </footer>
+
+    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+        // Smooth scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+
+        // Intersection Observer for scroll animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.animationPlayState = 'running';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelector

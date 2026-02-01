@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Members | Aizawa Research Group</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Tiempos+Text:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --color-bg: #F7F6F3;
+            --color-text: #191918;
+            --color-accent: #CC785C;
+            --color-border: rgba(25, 25, 24, 0.1);
+            --color-card-bg: #FFFFFF;
+            --font-serif: 'Tiempos Text', Georgia, serif;
+            --font-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-sans);
+            background-color: var(--color-bg);
+            color: var(--color-text);
+            line-height: 1.6;
+        }
+
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(247, 246, 243, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            border-bottom: 1px solid var(--color-border);
+        }
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: var(--font-serif);
+            font-size: 20px;
+            font-weight: 600;
+            color: var(--color-text);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .logo-img {
+            height: 32px;
+            width: auto;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 32px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--color-text);
+            text-decoration: none;
+            font-size: 15px;
+            transition: color 0.2s;
+        }
+
+        .nav-links a:hover {
+            color: var(--color-accent);
+        }
+
+        .page-header {
+            margin-top: 72px;
+            padding: 80px 40px 60px;
+            max-width: 1400px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .page-header h1 {
+            font-family: var(--font-serif);
+            font-size: clamp(42px, 6vw, 64px);
+            margin-bottom: 24px;
+            font-weight: 400;
+        }
+
+        .page-header p {
+            font-size: 20px;
+            color: rgba(25, 25, 24, 0.7);
+            max-width: 700px;
+        }
+
+        .members-section {
+            padding: 40px 40px 80px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            font-family: var(--font-serif);
+            font-size: 32px;
+            margin-bottom: 40px;
+            font-weight: 400;
+        }
+
+        .member-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 40px;
+            margin-bottom: 80px;
+        }
+
+        .member-card {
+            background: var(--color-card-bg);
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid var(--color-border);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .member-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.06);
+        }
+
+        .member-image {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+            background: linear-gradient(135deg, #f5f5f5 0%, #e5e5e5 100%);
+        }
+
+        .member-info {
+            padding: 24px;
+        }
+
+        .member-name {
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+
+        .member-role {
+            font-size: 14px;
+            color: var(--color-accent);
+            margin-bottom: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .member-bio {
+            font-size: 15px;
+            color: rgba(25, 25, 24, 0.7);
+            line-height: 1.6;
+        }
+
+        .member-links {
+            margin-top: 16px;
+            display: flex;
+            gap: 12px;
+        }
+
+        .member-link {
+            color: var(--color-accent);
+            text-decoration: none;
+            font-size: 14px;
+            transition: opacity 0.2s;
+        }
+
+        .member-link:hover {
+            opacity: 0.7;
+        }
+
+        footer {
+            background: var(--color-text);
+            color: rgba(255, 255, 255, 0.8);
+            padding: 80px 40px 40px;
+        }
+
+        .footer-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 48px;
+            margin-bottom: 48px;
+        }
+
+        .footer-section h4 {
+            font-family: var(--font-serif);
+            color: white;
+            margin-bottom: 16px;
+            font-size: 18px;
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 12px;
+        }
+
+        .footer-links a {
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            font-size: 15px;
+            transition: color 0.2s;
+        }
+
+        .footer-links a:hover {
+            color: white;
+        }
+
+        .footer-bottom {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding-top: 32px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            text-align: center;
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 0.8s ease-out forwards;
+        }
+
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .stagger-1 { animation-delay: 0.1s; }
+        .stagger-2 { animation-delay: 0.2s; }
+        .stagger-3 { animation-delay: 0.3s; }
+        .stagger-4 { animation-delay: 0.4s; }
+        .stagger-5 { animation-delay: 0.5s; }
+
+        @media (max-width: 768px) {
+            .member-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="nav-container">
+            <a href="https://www.n-aizawa.com" class="logo">
+                <img src="images/logo.png" alt="Aizawa Research Group Logo" class="logo-img">
+                <span>Aizawa Research Group</span>
+            </a>
+            <ul class="nav-links">
+                <li><a href="https://www.n-aizawa.com">Home</a></li>
+                <li><a href="members.html">Members</a></li>
+                <li><a href="research.html">Research</a></li>
+                <li><a href="publications.html">Publications</a></li>
+                <li><a href="facilities.html">Facilities</a></li>
+                <li><a href="join.html">Join</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="page-header fade-in">
+        <h1> Members</h1>
+    </div>
+
+    <div class="members-section">
+        <div class="member-grid">
+            <div class="member-card fade-in stagger-1">
+                <img src="images/member-naoya-aizawa.png" alt="Naoya Aizawa" class="member-image">
+                <div class="member-info">
+                    <div class="member-role">PI, 准教授 / Associate Professor</div>
+                    <h3 class="member-name">相澤 直矢 / Naoya Aizawa</h3>
+                    <div class="member-links">
+                        <a href="https://researchmap.jp/naoya-aizawa" class="member-link">More info</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="member-card fade-in stagger-2">
+                <img src="images/member-placeholder.jpg" alt="Tatsuya Mori" class="member-image">
+                <div class="member-info">
+                    <div class="member-role">特任講師 / Project Lecturer</div>
+                    <h3 class="member-name">森 達哉 / Tatsuya Mori</h3>
+                    <div class="member-links">
+                        <a href="" class="member-link">More info</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="member-card fade-in stagger-3">
+                <img src="images/member-placeholder.jpg" alt="Asami Aoki" class="member-image">
+                <div class="member-info">
+                    <div class="member-role">特定専門職員</div>
+                    <h3 class="member-name">青木 麻美 / Asami Aoki</h3>
+                    <div class="member-links">
+                        <a href="" class="member-link">More info</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="member-card fade-in stagger-4">
+                <img src="images/member-placeholder.jpg" alt="Postdoctoral Researcher" class="member-image">
+                <div class="member-info">
+                    <div class="member-role">WPI博士研究員</div>
+                    <h3 class="member-name">–</h3>
+                    <div class="member-links">
+                        <a href="" class="member-link">More info</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="member-card fade-in stagger-5">
+                <img src="images/member-placeholder.jpg" alt="Reo Kurihara" class="member-image">
+                <div class="member-info">
+                    <div class="member-role">D1, 創発RA</div>
+                    <h3 class="member-name">栗原 怜央 / Reo Kurihara</h3>
+                    <div class="member-links">
+                        <a href="" class="member-link">More info</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="member-card fade-in">
+                <img src="images/member-placeholder.jpg" alt="Jinyao Xu" class="member-image">
+                <div class="member-info">
+                    <div class="member-role">D1, 創発RA</div>
+                    <h3 class="member-name">徐 金垚 / Jinyao Xu</h3>
+                    <div class="member-links">
+                        <a href="" class="member-link">More info</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="member-card fade-in">
+                <img src="images/member-placeholder.jpg" alt="Yugo Iwami" class="member-image">
+                <div class="member-info">
+                    <div class="member-role">M2 (Osaka University)</div>
+                    <h3 class="member-name">岩見 勇吾 / Yugo Iwami</h3>
+                    <div class="member-links">
+                        <a href="" class="member-link">More info</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="member-card fade-in">
+                <img src="images/member-placeholder.jpg" alt="Shiori Ono" class="member-image">
+                <div class="member-info">
+                    <div class="member-role">M1 (Osaka University)</div>
+                    <h3 class="member-name">大野 史織 / Shiori Ono</h3>
+                    <div class="member-links">
+                        <a href="" class="member-link">More info</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-container">
+            <div class="footer-section">
+                <h4>Research</h4>
+                <ul class="footer-links">
+                    <li><a href="research.html">Research Areas</a></li>
+                    <li><a href="publications.html">Publications</a></li>
+                    <li><a href="facilities.html">Facilities</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-section">
+                <h4>People</h4>
+                <ul class="footer-links">
+                    <li><a href="members.html">Members</a></li>
+                    <li><a href="join.html">Join Our Lab </a></li>
+                </ul>
+            </div>
+
+            <div class="footer-section">
+                <h4>Contact</h4>
+                <ul class="footer-links">
+                    <li><a href="mailto:n-aizawa@icredd.hokudai.ac.jp">Email: n-aizawa @ icredd.hokudai.ac.jp</a></li>
+                    <li><a>Phone: +81(0)-6-6879-4585</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-section">
+                <h4>Location</h4>
+                <ul class="footer-links">
+                    <li><a href="https://maps.app.goo.gl/dK8zmJ11FePW5Gjk9">Kita Campus, Building 8, Room 02-103
+                        Kita 21, Nishi 10, Kita-ku
+                        Sapporo 001-0021
+                        Japan</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            © 2025–2026 Aizawa Research Group, ICReDD, Hokkaido University
+        </div>
+    </footer>
+
+    <script>
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.animationPlayState = 'running';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelector
