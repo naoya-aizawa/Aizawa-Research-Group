@@ -630,6 +630,47 @@
                 padding: 20px 40px;
             }
         }
+        
+        .news-cover {
+            --cover-bg: var(--color-accent);
+            --cover-fg: #FFFFFF;
+            position: relative;
+            width: 100%;
+            aspect-ratio: 1 / 1;
+            padding: 28px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            overflow: hidden;
+            background: var(--cover-bg);
+            color: var(--cover-fg);
+            isolation: isolate;
+        }
+
+        .news-cover--sand {
+            --cover-bg: linear-gradient(145deg, #F1ECE4 0%, #E6DDD0 100%);
+            --cover-fg: #191918;
+        }
+
+        .news-cover-label {
+            align-self: flex-start;
+            font-size: 12px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            padding: 5px 12px;
+            border: 1px solid currentColor;
+            border-radius: 999px;
+            opacity: 0.85;
+        }
+
+        .news-cover-title {
+            font-family: var(--font-serif);
+            font-size: clamp(30px, 3.2vw, 44px);
+            line-height: 1.15;
+            max-width: 85%;
+            word-break: keep-all;
+            overflow-wrap: anywhere;
+        }
     </style>
 </head>
 <body>
@@ -701,7 +742,64 @@
         <h2 class="section-title fade-in">Recent News</h2>
         <div class="news-grid">
 
-            <a href="https://ksac.site/next-pioneer-demoday2026/index.html" target="_blank" style="text-decoration:none; color:inherit;">
+            <a href="https://www.n-aizawa.com/members" target="_blank" style="text-decoration:none; color:inherit;">
+            <div class="news-card fade-in">
+                <div class="news-cover news-cover--sand">
+                    <span class="news-cover-label">MEMBERS</span>
+                    <span class="news-cover-title">New Member</span>
+                </div>
+                <div class="news-content">
+                    <div class="news-date">Octorber 2026</div>
+                    <h3>Jisu Min</h3>
+                    <p>We welcome Jisu Min, a new master's student at the Graduate School of Chemical Sciences and Engineering, Hokkaido University!</p>
+                </div>
+            </div>
+            </a>
+            
+            <a href="https://www.n-aizawa.com/members" target="_blank" style="text-decoration:none; color:inherit;">
+            <div class="news-card fade-in">
+                <div class="news-cover news-cover--sand">
+                    <span class="news-cover-label">MEMBERS</span>
+                    <span class="news-cover-title">New Visiting Member</span>
+                </div>
+                <div class="news-content">
+                    <div class="news-date">September 2026</div>
+                    <h3>Dr. Yipeng Zhang (Visiting Scholar)</h3>
+                    <p>We welcome Dr. Yipeng Zhang from CUHK-Shenzhen, who will spend two months with us through the ICReDD MANABIYA program!</p>
+                </div>
+            </div>
+            </a>
+            
+            <a href="https://www.n-aizawa.com/members" target="_blank" style="text-decoration:none; color:inherit;">
+            <div class="news-card fade-in">
+                <div class="news-cover news-cover--sand">
+                    <span class="news-cover-label">MEMBERS</span>
+                    <span class="news-cover-title">New Member</span>
+                </div>
+                <div class="news-content">
+                    <div class="news-date">May 2026</div>
+                    <h3>Dr. Naohiro Namba</h3>
+                    <p>We welcome Dr. Naohiro Namba as a new WPI Postdoctoral Researcher!</p>
+                </div>
+            </div>
+            </a>
+            
+            <a href="https://www.n-aizawa.com/members" target="_blank" style="text-decoration:none; color:inherit;">
+            <div class="news-card fade-in">
+                <div class="news-cover news-cover--sand">
+                    <span class="news-cover-label">MEMBERS</span>
+                    <span class="news-cover-title">New Member</span>
+                </div>
+                <div class="news-content">
+                    <div class="news-date">April 2026</div>
+                    <h3>Dr. Tatsuya Mori</h3>
+                    <p>We welcome Dr. Tatsuya Mori as a new Project Lecturer!</p>
+                </div>
+            </div>
+            </a>
+            
+           
+           <a href="https://ksac.site/next-pioneer-demoday2026/index.html" target="_blank" style="text-decoration:none; color:inherit;">
             <div class="news-card fade-in stagger-1">
                 <img src="images/KSAC.jpg" alt="KSAC" class="news-image">
                 <div class="news-content">
